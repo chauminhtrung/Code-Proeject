@@ -8,7 +8,7 @@ const getAllProduct = async () => {
       carouselHtml += `
         <div class="item" style="width: 300px;height: 480px;">
           <div class="card">
-            <a href="#"><img src="/IMG/course-angular.jpg" alt="course" class="card-img-top" width="300"></a>
+            <a href="#"><img src="/IMG/${product.image}" alt="course" class="card-img-top" width="300" height="170"></a>
             <div class="card-body">
               <div class="d-flex justify-content-between align-items-center mb-3">
                 <span class="badge bg-info-soft">Intermediate</span>
