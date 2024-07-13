@@ -51,7 +51,7 @@ public class SecurityController {
         }
 
         if(bindingResult.hasErrors()) {
-            return "register";
+            return "form/register";
         }
 
         try {
@@ -61,6 +61,7 @@ public class SecurityController {
             ACC.setPassword(bCrypt.encode(account.getPassword()));
             ACC.setFullname(account.getFullname());
             ACC.setEmail(account.getEmail());
+            ACC.setPhoto("user.png");
             accountService.save(ACC);
 
             model.addAttribute("account", new Account());
@@ -70,8 +71,7 @@ public class SecurityController {
             bindingResult.addError(new FieldError("account", "fullname",e.getMessage()));
         }
 
-
-        return "register";
+        return "form/register";
     }
 
 
