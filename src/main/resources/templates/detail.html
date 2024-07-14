@@ -13,41 +13,18 @@
         crossorigin="anonymous">
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="/CSS/detail.css">
 </head>
-<style>
-  a {
-    text-decoration: none;
-  }
-
-  .sidebar {
-    background-color: white;
-    border-color: #42a5f5;
-    color: #42a5f5;
-  }
-
-  .sidebar_column {
-    width: 230px;
-    height: 690px;
-    background-color: #e2e8f0
-  }
-
-  .content_column {
-    width: 1315px;
-    height: 300px;
-    margin-left: 5px;
-    background-color: #754ffe
-  }
-</style>
 <body>
 <nav>
   <div th:replace="/layout/menu"></div>
 </nav>
-<div class="row">
-  <div class="sidebar_column col-2 d-flex flex-column p-4">
+<div class="row ">
+  <div class="sidebar_column col-2 d-flex flex-column p-4 bg-dark text-white">
     <button type="button" class="btn btn-danger fs-5 fw-bold"><i class="bi bi-person-plus-fill"></i>
       Đăng ký
     </button>
-    <button type="button" class="sidebar btn btn-primary mt-2 fs-5 fw-bold"><i
+    <button type="button" class="sidebar btn btn-primary mt-2 fs-5 fw-bold bg-dark"><i
         class="bi bi-person-fill"></i> Đăng nhập
     </button>
     <hr>
@@ -55,59 +32,47 @@
       <li>
         <span class="fw-bold text-secondary">PAGES</span>
       </li>
-      <li class="nav-item">
-        <div class="dropend" style="margin-left: 16px">
+      <li class="nav-item ">
+        <div class="dropend mt-3" style="margin-left: 16px">
           <a href="#" type="button" class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown"
              aria-expanded="false" data-bs-auto-close="outside"><i class="bi bi-book"></i> Khóa học
           </a>
-          <ul class="dropdown-menu ms-4" style="width: 250px;height: 670px;">
-            <li class="dropend">
-              <a class="dropdown-item" data-bs-toggle="dropdown" href="#" aria-expanded="false">Lập
-                trình</a>
-              <ul class="dropdown-menu" style="width: 250px;height: 670px;">
-                <li><a class="dropdown-item" href="#">item1</a></li>
-                <li><a class="dropdown-item" href="#">item2</a></li>
-              </ul>
-            </li>
-            <li class="dropend">
-              <a class="dropdown-item" data-bs-toggle="dropdown" href="#" aria-expanded="false">Lập
-                trình1</a>
-              <ul class="dropdown-menu" style="width: 250px;height: 670px;">
-                <li><a class="dropdown-item" href="#">item3</a></li>
-                <li><a class="dropdown-item" href="#">item4</a></li>
-              </ul>
-            </li>
-            <li><a class="dropdown-item" href="#">Action three</a></li>
+          <!-- category-detail -->
+          <ul class="dropdown-menu ms-4 rounded-0 bg-light" id="category" style="width: 330px;height: 637px;">
           </ul>
+          <!-- category-detail -->
         </div>
       </li>
       <li>
-        <a href="#" class="nav-link link-dark"><i class="bi bi-question-circle"></i> Hỏi đáp </a>
+        <a href="#" class="nav-link text-white mt-1"><i class="bi bi-question-circle"></i> Hỏi đáp
+        </a>
       </li>
       <li>
-        <a href="#" class="nav-link link-dark"><i class="bi bi-file-earmark-text"></i> Bài viết </a>
+        <a href="#" class="nav-link text-white mt-1"><i class="bi bi-file-earmark-text"></i> Bài
+          viết </a>
       </li>
       <li>
-        <a href="#" class="nav-link link-dark"><i class="bi bi-tags"></i> TAG </a>
+        <a href="#" class="nav-link text-white mt-1"><i class="bi bi-tags"></i> TAG </a>
       </li>
       <li>
-        <a href="#" class="nav-link link-dark"><i class="bi bi-info-circle"></i> Giới thiệu </a>
+        <a href="#" class="nav-link text-white mt-1"><i class="bi bi-info-circle"></i> Giới thiệu
+        </a>
       </li>
       <li>
-        <a href="#" class="nav-link link-dark"><i class="bi bi-bank"></i> Tài trợ </a>
+        <a href="#" class="nav-link text-white mt-1"><i class="bi bi-bank"></i> Tài trợ </a>
       </li>
       <li>
-        <a href="#" class="nav-link link-dark"><i class="bi bi-pencil-square"></i> Phản hồi </a>
+        <a href="#" class="nav-link text-white"><i class="bi bi-pencil-square"></i> Phản hồi </a>
       </li>
     </ul>
   </div>
 
   <section class="content_column col-10">
-    <div class="mt-4 ms-5">
-      <h1 class="text-white display-4 fw-semibold"> Bắt đầu với JavaScript</h1>
-      <p class="text-white mb-4 lead">
-        ${detail.name}
-      </p>
+    <div class="mt-4 ms-5 me-5" >
+      <!-- detail1   -->
+      <div id="detailProduct">
+      </div>
+      <!-- detail1   -->
       <div class="d-flex">
         <a href="#" class="text-white"><i class="bi bi-bookmark"></i> Đánh dấu trang</a>
         <a href="#" class="text-white ms-4"><i class="bi bi-person"></i> 1200 Đã Đăng Ký</a>
@@ -1491,25 +1456,12 @@
             </div>
           </div>
           <div class="col-lg-4 col-md-12 col-12 mt-4">
-            <!-- Card -->
             <div class="card mb-3 mb-4">
-              <div class="p-1">
-                <div
-                    class="d-flex justify-content-center align-items-center rounded border-white border rounded-3 bg-cover"
-                    style="background-image: url(/IMG/course-javascript.jpg); height: 210px">
-                  <a class="glightbox icon-shape rounded-circle btn-play icon-xl"
-                     href="https://www.youtube.com/watch?v=Nfzi7034Kbg">
-                    <i class="bi bi-play"></i>
-                  </a>
-                </div>
+              <!-- detail2 -->
+              <div class="p-1" id="detail1">
               </div>
-              <!-- Card body -->
+              <!-- detail2 -->
               <div class="card-body">
-                <!-- Price single page -->
-                <div class="mb-3">
-                  <span class="text-dark fw-bold h2">$600</span>
-                  <del class="fs-4">$750</del>
-                </div>
                 <div class="d-grid">
                   <a href="#" class="btn btn-primary mb-2">Start Free Month</a>
                   <a href="#" class="btn btn-outline-primary">Get Full Access</a>
@@ -1663,11 +1615,12 @@
               <!-- Card -->
               <div class="card mb-4 card-hover">
                 <a href="#"><img src="/IMG/course-graphql.jpg"
-                                                  alt="course" class="card-img-top"></a>
+                                 alt="course" class="card-img-top"></a>
                 <!-- Card body -->
                 <div class="card-body">
                   <h4 class="mb-2">
-                    <a href="#" class="text-inherit">GraphQL:introduction to graphQL for beginners</a>
+                    <a href="#" class="text-inherit">GraphQL:introduction to graphQL for
+                      beginners</a>
                   </h4>
                   <ul class="mb-3 list-inline">
                     <li class="list-inline-item">
@@ -1714,7 +1667,7 @@
               <!-- Card -->
               <div class="card mb-4 card-hover">
                 <a href="#"><img src="/IMG/course-angular.jpg"
-                                                  alt="course" class="card-img-top"></a>
+                                 alt="course" class="card-img-top"></a>
                 <div class="card-body">
                   <h4 class="mb-2">
                     <a href="#" class="text-inherit">Angular -the complete guide
@@ -1818,6 +1771,11 @@
   </section>
 
 </div>
+<script src="/JS/detail.js"></script>
+<!-- Axios -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<!-- jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>

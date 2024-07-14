@@ -4,6 +4,7 @@ import com.example.asm_java6.Dao.ProductDao;
 import com.example.asm_java6.Model.Product;
 import com.example.asm_java6.Service.ProductService;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,13 @@ public class ProductServiceimp implements ProductService {
   }
 
   @Override
-  public List<Product> findProductById(String productId) {
-    return productDao.findProductById(productId);
+  public Product findProductById(Integer productId) {
+    Optional<Product> optionalProduct = productDao.findById(productId);
+    return optionalProduct.orElse(null);
+  }
+
+  @Override
+  public List<Product> findAllRandom() {
+    return productDao.findAllRandom();
   }
 }

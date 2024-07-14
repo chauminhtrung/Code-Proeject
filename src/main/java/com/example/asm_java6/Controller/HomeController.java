@@ -8,17 +8,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class HomeController {
 
     @RequestMapping("/home")
     public String home() {
-
         return "home";
     }
-    @RequestMapping("/detail")
-    public String detail() {
+    @RequestMapping("/detail/id")
+    public String detail(@RequestParam("id") Integer id) {
         return "detail";
     }
 }

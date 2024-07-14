@@ -1,6 +1,7 @@
 package com.example.asm_java6.API;
 
-import com.example.asm_java6.Service.ProductService;
+import com.example.asm_java6.Service.CategoryDetailService;
+import com.example.asm_java6.Service.CategoryService;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,19 +13,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api-product")
-public class ProductAPI {
+@RequestMapping("/api-category")
+public class CategoryAPI {
 
   @Autowired
-  private ProductService productService;
+  private CategoryService categoryService;
+  @Autowired
+  private CategoryDetailService categoryDetailService;
 
-  @GetMapping("/get-all-product")
+  @GetMapping("/get-all-category")
   public ResponseEntity<?> getAllProduct() {
     Map<String, Object> rs = new HashMap<>();
     try {
       rs.put("status", true);
       rs.put("message", "Call api success");
-      rs.put("data", productService.findAll());
+      rs.put("data", categoryService.findAll());
     } catch (Exception ex) {
       rs.put("status", false);
       rs.put("message", "Call api failed");
@@ -34,33 +37,18 @@ public class ProductAPI {
     return ResponseEntity.ok(rs);
   }
 
-  @GetMapping("/get-all-random")
-  public ResponseEntity<?> getAllRandom() {
+  @GetMapping("/category-detail")
+  public ResponseEntity<?> getCategoryDetailsByCategoryId(@RequestParam String categoryId) {
     Map<String, Object> rs = new HashMap<>();
     try {
       rs.put("status", true);
-      rs.put("message", "Call api success");
-      rs.put("data", productService.findAllRandom());
+      rs.put("message", "Get category details successfully");
+      rs.put("data", categoryDetailService.getCategoryDetailsByCategoryId(categoryId));
     } catch (Exception ex) {
       rs.put("status", false);
-      rs.put("message", "Call api failed");
+      rs.put("message", "Failed to get category details");
       rs.put("data", null);
       ex.printStackTrace();
-    }
-    return ResponseEntity.ok(rs);
-  }
-
-  @GetMapping("/detail-product")
-  public ResponseEntity<?> getProductById(@RequestParam("id") Integer id) {
-    Map<String, Object> rs = new HashMap<>();
-    try {
-      rs.put("status", true);
-      rs.put("message", "Call api success");
-      rs.put("data", productService.findProductById(id));
-    } catch (Exception ex) {
-      rs.put("status", false);
-      rs.put("message", "Call api failed");
-      rs.put("data", null);
     }
     return ResponseEntity.ok(rs);
   }
