@@ -64,4 +64,19 @@ public class ProductAPI {
     }
     return ResponseEntity.ok(rs);
   }
+
+  @GetMapping("/products-categoryId")
+  public ResponseEntity<?> getProductsByCategoryId(@RequestParam("categoryId") String categoryId) {
+    Map<String, Object> rs = new HashMap<>();
+    try {
+      rs.put("status", true);
+      rs.put("message", "Call api success");
+      rs.put("data", productService.getProductsByCategoryId(categoryId));
+    } catch (Exception ex) {
+      rs.put("status", false);
+      rs.put("message", "Call api failed");
+      rs.put("data", null);
+    }
+    return ResponseEntity.ok(rs);
+  }
 }

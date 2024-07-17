@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CategoryDetailServiceimp implements CategoryDetailService {
+
   @Autowired
   private CategoryDetailDao categoryDetailDao;
 

@@ -123,3 +123,61 @@ document.addEventListener('DOMContentLoaded', () => {
   getAllProduct();
   getAllRandom();
 });
+// =============================================================================
+const fillCategoryMenu = async () => {
+  try {
+    const response = await axios.get('/api-category/get-all-category');
+    const categories = response.data.data;
+
+    const navList = document.getElementById('pills-tab');
+
+    categories.forEach((category, index) => {
+      const navItem = document.createElement('li');
+      navItem.className = 'nav-item';
+
+      const navLink = document.createElement('a');
+      navLink.className = 'nav-link';
+      navLink.setAttribute('id', `pills-${category.name.toLowerCase()}-tab`);
+      navLink.setAttribute('data-toggle', 'pill');
+      navLink.setAttribute('href', `#pills-tab${index + 1}`); // Thêm index + 1 vào ID của tab
+      navLink.setAttribute('role', 'tab');
+      navLink.setAttribute('aria-controls', `pills-tab${index + 1}`); // Thêm index + 1 vào aria-controls
+      navLink.setAttribute('aria-selected', 'false');
+      navLink.setAttribute('tabindex', '-1');
+      navLink.innerText = category.name;
+
+      navLink.addEventListener('click', function(event) {
+        event.preventDefault();
+
+        const activeTab = document.querySelector('.nav-link.active');
+        if (activeTab) {
+          activeTab.classList.remove('active');
+        }
+
+        this.classList.add('active');
+
+        // Ẩn tất cả các tab content
+        const tabContents = document.querySelectorAll('.tab-pane');
+        tabContents.forEach(tab => {
+          tab.classList.remove('active', 'show');
+        });
+
+        // Lấy ID của tab content tương ứng với tab được click
+        const targetTabId = this.getAttribute('href').substring(1);
+        const targetTabContent = document.getElementById(targetTabId);
+
+        // Hiển thị tab content tương ứng
+        if (targetTabContent) {
+          targetTabContent.classList.add('active', 'show');
+        }
+      });
+
+      navItem.appendChild(navLink);
+      navList.appendChild(navItem);
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+document.addEventListener('DOMContentLoaded', fillCategoryMenu);

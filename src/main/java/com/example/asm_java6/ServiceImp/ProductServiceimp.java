@@ -29,4 +29,9 @@ public class ProductServiceimp implements ProductService {
   public List<Product> findAllRandom() {
     return productDao.findAllRandom();
   }
+
+  @Override
+  public List<Product> getProductsByCategoryId(String categoryId) {
+    return productDao.findByCategoryId(categoryId);
+  }
 }

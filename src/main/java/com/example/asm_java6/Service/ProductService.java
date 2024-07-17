@@ -14,4 +14,7 @@ public interface ProductService {
 
   @Transactional
   List<Product> findAllRandom();
+
+  @Transactional
+  List<Product> getProductsByCategoryId(String categoryId);
 }

@@ -53,33 +53,48 @@ document.addEventListener('DOMContentLoaded', detail2);
 
 const category = async () => {
   let productContainer = $('#category');
-  await axios.get('/api-category/get-all-category')
-  .then(response => {
+
+  const getCategoryDetails = async (categoryId, dropdownMenu) => {
+    try {
+      const response = await axios.get(`/api-category/category-detail?categoryId=${categoryId}`);
+      dropdownMenu.html('');
+      response.data.data.forEach(categoryDetail => {
+        dropdownMenu.append(`<li class="mt-2"><a class="dropdown-item fs-6" href="#">${categoryDetail.name}</a></li>`);
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  await axios.get('/api-category/get-all-category').then(response => {
     productContainer.html('');
-    response.data.data.forEach(category => {
-      let html = `
-      <li class="dropend mt-3">
-        <a class="dropdown-item fs-4" data-bs-toggle="dropdown"
-           aria-expanded="false">
-          <div class="d-flex">
-            <p>${category.name}</p>
-            <b class="ms-auto"><i class="bi bi-chevron-right"></i></b>
-          </div>
-        </a>
-        <ul class="dropdown-menu bg-light" style="width: 320px;height: 637px;">
-          <li><a class="dropdown-item" href="#">item1</a></li>
-          <li><a class="dropdown-item" href="#">item2</a></li>
-        </ul>
-      </li>
-                `;
-      productContainer.append(html);
+    response.data.data.forEach(cate => {
+      let dropdownMenu = $('<ul class="dropdown-menu bg-light" style="width: 320px;height: 637px;"></ul>');
+
+      let listItem = $(`  
+        <li class="dropend mt-3">  
+          <a class="dropdown-item fs-6" data-bs-toggle="dropdown" aria-expanded="false" data-category-id="${cate.id}">  
+            <div class="d-flex">  
+              <p>${cate.name}</p>  
+              <b class="ms-auto"><i class="bi bi-chevron-right"></i></b>  
+            </div>  
+          </a>  
+        </li>  
+      `);
+
+      listItem.append(dropdownMenu);
+      productContainer.append(listItem);
+
+      listItem.on('click', async function() {
+        await getCategoryDetails(cate.id, dropdownMenu);
+      });
     });
   })
   .catch(error => {
     alert(error);
   });
 }
-// Gọi hàm getAllProduct khi trang được tải
+// Gọi hàm category khi trang được tải
 document.addEventListener('DOMContentLoaded', category);
 
 
