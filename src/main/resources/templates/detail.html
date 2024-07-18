@@ -1,78 +1,18 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic(~{::body})}">
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
-  <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
-  <link rel="stylesheet" href="/CSS/theme.min.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-        crossorigin="anonymous">
-  <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/CSS/detail.css">
+
 </head>
 <body>
-<nav>
-  <div th:replace="/layout/menu"></div>
-</nav>
-<div class="row ">
-  <div class="sidebar_column col-2 d-flex flex-column p-4 bg-dark text-white">
-    <button type="button" class="btn btn-danger fs-5 fw-bold"><i class="bi bi-person-plus-fill"></i>
-      Đăng ký
-    </button>
-    <button type="button" class="sidebar btn btn-primary mt-2 fs-5 fw-bold bg-dark"><i
-        class="bi bi-person-fill"></i> Đăng nhập
-    </button>
-    <hr>
-    <ul class="nav nav-pills flex-column mb-auto">
-      <li>
-        <span class="fw-bold text-secondary">PAGES</span>
-      </li>
-      <li class="nav-item ">
-        <div class="dropend mt-3" style="margin-left: 16px">
-          <a href="#" type="button" class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown"
-             aria-expanded="false" data-bs-auto-close="outside"><i class="bi bi-book"></i> Khóa học
-          </a>
-          <!-- category-detail -->
-          <ul class="dropdown-menu ms-4 rounded-0 bg-light" id="category" style="width: 330px;height: 637px;">
-          </ul>
-          <!-- category-detail -->
-        </div>
-      </li>
-      <li>
-        <a href="#" class="nav-link text-white mt-1"><i class="bi bi-question-circle"></i> Hỏi đáp
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link text-white mt-1"><i class="bi bi-file-earmark-text"></i> Bài
-          viết </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link text-white mt-1"><i class="bi bi-tags"></i> TAG </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link text-white mt-1"><i class="bi bi-info-circle"></i> Giới thiệu
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link text-white mt-1"><i class="bi bi-bank"></i> Tài trợ </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link text-white"><i class="bi bi-pencil-square"></i> Phản hồi </a>
-      </li>
-    </ul>
-  </div>
 
   <section class="content_column col-10">
     <div class="mt-4 ms-5 me-5" >
       <!-- detail1   -->
       <div id="detailProduct">
       </div>
-      <!-- detail1   -->
+      <!-- end detail1   -->
       <div class="d-flex">
         <a href="#" class="text-white"><i class="bi bi-bookmark"></i> Đánh dấu trang</a>
         <a href="#" class="text-white ms-4"><i class="bi bi-person"></i> 1200 Đã Đăng Ký</a>
@@ -1500,55 +1440,7 @@
               </div>
             </div>
             <!-- Card -->
-            <div class="card">
-              <!-- Card body -->
-              <div class="card-body">
-                <div class="d-flex align-items-center">
-                  <div class="position-relative">
-                    <img src="../assets/images/avatar/avatar-1.jpg" alt="avatar"
-                         class="rounded-circle avatar-xl">
-                    <a href="#" class="position-absolute mt-2 ms-n3" data-bs-toggle="tooltip"
-                       data-placement="top" aria-label="Verifed" data-bs-original-title="Verifed">
-                      <img src="../assets/images/svg/checked-mark.svg" alt="checked-mark"
-                           height="30" width="30">
-                    </a>
-                  </div>
-                  <div class="ms-4">
-                    <h4 class="mb-0">Jenny Wilson</h4>
-                    <p class="mb-1 fs-6">Front-end Developer, Designer</p>
-                    <p class="fs-6 mb-1 d-flex align-items-center">
-                      <span class="text-warning">4.5</span>
-                      <span class="fs-6"> <i class="bi bi-star-fill text-warning"></i> </span>
-                      Instructor Rating
-                    </p>
-                  </div>
-                </div>
-                <div class="border-top row mt-3 border-bottom mb-3 g-0">
-                  <div class="col">
-                    <div class="pe-1 ps-2 py-3">
-                      <h5 class="mb-0">11,604</h5>
-                      <span>Students</span>
-                    </div>
-                  </div>
-                  <div class="col border-start">
-                    <div class="pe-1 ps-3 py-3">
-                      <h5 class="mb-0">32</h5>
-                      <span>Courses</span>
-                    </div>
-                  </div>
-                  <div class="col border-start">
-                    <div class="pe-1 ps-3 py-3">
-                      <h5 class="mb-0">12,230</h5>
-                      <span>Reviews</span>
-                    </div>
-                  </div>
-                </div>
-                <p>I am an Innovation designer focussing on UX/UI based in Berlin. As a creative
-                  resident at Figma explored the city of the future and how new technologies.</p>
-                <a href="instructor-profile.html" class="btn btn-outline-secondary btn-sm">View
-                  Details</a>
-              </div>
-            </div>
+
           </div>
         </div>
         <!-- Card -->
@@ -1611,158 +1503,9 @@
                 </div>
               </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-12">
-              <!-- Card -->
-              <div class="card mb-4 card-hover">
-                <a href="#"><img src="/IMG/course-graphql.jpg"
-                                 alt="course" class="card-img-top"></a>
-                <!-- Card body -->
-                <div class="card-body">
-                  <h4 class="mb-2">
-                    <a href="#" class="text-inherit">GraphQL:introduction to graphQL for
-                      beginners</a>
-                  </h4>
-                  <ul class="mb-3 list-inline">
-                    <li class="list-inline-item">
-                      <i class="bi bi-clock"></i>
-                      <span>2h 46m</span>
-                    </li>
-                    <li class="list-inline-item">
-                      <i class="bi bi-bar-chart-fill"></i>
-                      Advance
-                    </li>
-                  </ul>
-                  <div class="mt-3 d-flex align-baseline lh-1">
-                    <span class="fs-6">
-                      <i class="bi bi-star-fill text-warning"></i>
-                      <i class="bi bi-star-fill text-warning"></i>
-                      <i class="bi bi-star-fill text-warning"></i>
-                      <i class="bi bi-star-fill text-warning"></i>
-                      <i class="bi bi-star-fill text-warning"></i>
-                    </span>
-                    <span class="text-warning mx-1">4.5</span>
-                    <span class="fs-6">(9,300)</span>
-                  </div>
-                </div>
-                <!-- Card footer -->
-                <div class="card-footer">
-                  <div class="row align-items-center g-0">
-                    <div class="col-auto">
-                      <img src="../assets/images/avatar/avatar-2.jpg"
-                           class="rounded-circle avatar-xs" alt="avatar">
-                    </div>
-                    <div class="col ms-2">
-                      <span>Ted Hawkins</span>
-                    </div>
-                    <div class="col-auto">
-                      <a href="#" class="text-reset bookmark">
-                        <i class="fe fe-bookmark fs-4"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-12">
-              <!-- Card -->
-              <div class="card mb-4 card-hover">
-                <a href="#"><img src="/IMG/course-angular.jpg"
-                                 alt="course" class="card-img-top"></a>
-                <div class="card-body">
-                  <h4 class="mb-2">
-                    <a href="#" class="text-inherit">Angular -the complete guide
-                      for beginner</a>
-                  </h4>
-                  <ul class="mb-3 list-inline">
-                    <li class="list-inline-item">
-                      <i class="bi bi-clock"></i>
-                      <span>3h 56m</span>
-                    </li>
-                    <li class="list-inline-item">
-                      <i class="bi bi-bar-chart-fill"></i>
-                      Beginner
-                    </li>
-                  </ul>
-                  <div class="mt-3 d-flex align-baseline lh-1">
-                    <span class="fs-6">
-                      <i class="bi bi-star-fill text-warning"></i>
-                      <i class="bi bi-star-fill text-warning"></i>
-                      <i class="bi bi-star-fill text-warning"></i>
-                      <i class="bi bi-star-fill text-warning"></i>
-                      <i class="bi bi-star-fill text-warning"></i>
-                    </span>
-                    <span class="text-warning mx-1">4.5</span>
-                    <span class="fs-6">(8,890)</span>
-                  </div>
-                </div>
-                <!-- Card footer -->
-                <div class="card-footer">
-                  <div class="row align-items-center g-0">
-                    <div class="col-auto">
-                      <img src="../assets/images/avatar/avatar-3.jpg"
-                           class="rounded-circle avatar-xs" alt="avatar">
-                    </div>
-                    <div class="col ms-2">
-                      <span>Juanita Bell</span>
-                    </div>
-                    <div class="col-auto">
-                      <a href="#" class="text-reset bookmark">
-                        <i class="fe fe-bookmark fs-4"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-12">
-              <div class="card mb-4 card-hover">
-                <a href="#"><img src="/IMG/course-python.jpg" alt="course" class="card-img-top"></a>
-                <div class="card-body">
-                  <h4 class="mb-2 ">
-                    <a href="#" class="text-inherit">The Python Course: build web
-                      application</a>
-                  </h4>
-                  <ul class="mb-3 list-inline">
-                    <li class="list-inline-item">
-                      <i class="bi bi-clock"></i>
-                      <span>2h 30m</span>
-                    </li>
-                    <li class="list-inline-item">
-                      <i class="bi bi-bar-chart-fill"></i>
-                      Intermediate
-                    </li>
-                  </ul>
-                  <div class="mt-3 d-flex align-baseline lh-1">
-                    <span class="fs-6">
-                      <i class="bi bi-star-fill text-warning"></i>
-                      <i class="bi bi-star-fill text-warning"></i>
-                      <i class="bi bi-star-fill text-warning"></i>
-                      <i class="bi bi-star-fill text-warning"></i>
-                      <i class="bi bi-star-fill text-warning"></i>
-                    </span>
-                    <span class="text-warning mx-1">4.5</span>
-                    <span class="fs-6">(13,245)</span>
-                  </div>
-                </div>
-                <!-- Card footer -->
-                <div class="card-footer">
-                  <div class="row align-items-center g-0">
-                    <div class="col-auto">
-                      <img src="../assets/images/avatar/avatar-4.jpg"
-                           class="rounded-circle avatar-xs" alt="avatar">
-                    </div>
-                    <div class="col ms-2">
-                      <span>Claire Robertson</span>
-                    </div>
-                    <div class="col-auto">
-                      <a href="#" class="text-reset bookmark">
-                        <i class="fe fe-bookmark fs-4"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+
+
+
           </div>
         </div>
       </div>
@@ -1770,15 +1513,9 @@
     <!--    -->
   </section>
 
-</div>
-<script src="/JS/detail.js"></script>
-<!-- Axios -->
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<!-- jQuery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
+
+
+
 </body>
 </html>
 

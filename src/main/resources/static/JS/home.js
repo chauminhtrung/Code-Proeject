@@ -2,14 +2,14 @@ const renderProductCard = (product) => {
   return `  
     <div class="item" style="width: 300px;height: 480px;">  
       <div class="card">  
-        <a href="#"><img src="/IMG/${product.image}" alt="course" class="card-img-top" width="300" height="170"></a>  
+        <a class="click-detail" data-id="${product.id}" href="#"><img src="/IMG/${product.image}" alt="course" class="card-img-top" width="300" height="170"></a>  
         <div class="card-body">  
           <div class="d-flex justify-content-between align-items-center mb-3">  
             <span class="badge bg-info-soft">Intermediate</span>  
             <a href="#" class="fs-5"><i class="fa-solid fa-heart align-middle"></i></a>  
           </div>  
           <div style="height: 50px">  
-            <h4 class="mb-2 text-truncate-line-2"><a href="/detail" class="text-inherit">${product.name}</a></h4>  
+            <h4 class="mb-2 text-truncate-line-2"><a class="click-detail" data-id="${product.id}" href="#" class="text-inherit">${product.name}</a></h4>  
           </div>  
           <small>By: Claire Evans</small>  
           <div class="lh-1 mt-3">  
@@ -73,12 +73,14 @@ const getAllProduct = async () => {
   } catch (error) {
     console.error('Error fetching data:', error);
   }
-
   $('.click-detail').click(function() {
     const id = $(this).data('id');
     window.location.href = `/detail/id?id=${id}`;
   });
+
 };
+
+
 
 const getAllRandom = async () => {
   try {

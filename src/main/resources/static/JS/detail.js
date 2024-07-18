@@ -76,6 +76,7 @@ const category = async () => {
           <a class="dropdown-item fs-6" data-bs-toggle="dropdown" aria-expanded="false" data-category-id="${cate.id}">  
             <div class="d-flex">  
               <p>${cate.name}</p>  
+
               <b class="ms-auto"><i class="bi bi-chevron-right"></i></b>  
             </div>  
           </a>  
@@ -83,6 +84,7 @@ const category = async () => {
       `);
 
       listItem.append(dropdownMenu);
+
       productContainer.append(listItem);
 
       listItem.on('click', async function() {
