@@ -74,6 +74,13 @@ public class SecurityController {
         return "form/register";
     }
 
+    @RequestMapping("/error/accedd-denied")
+    public String loginerrorAs(Model model) {
+        model.addAttribute("loginError", true);
+        model.addAttribute("message", "Khong co quyen truy xuat !!");
+        return "form/login";
+    }
+
 
 
 }

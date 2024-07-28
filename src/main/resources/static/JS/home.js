@@ -23,7 +23,7 @@ const renderProductCard = (product) => {
               </span>  
             </span>  
             <span class="text-warning">4.5</span>  
-            <span class="fs-6">(9,300)</span>  
+            <span class="fs-6">(9,300)</span>   
           </div>  
         </div>  
         <div class="card-footer">  

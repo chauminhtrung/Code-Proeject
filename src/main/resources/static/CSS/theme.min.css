@@ -8763,7 +8763,7 @@ vertical-align
 }
 
 .link-body-emphasis:focus, .link-body-emphasis:hover {
-  color: RGBA(var(--gk-emphasis-color-rgb), var(--gk-link-opacity, .75)) !important;
+  color: rgba(var(--gk-link-color-rgb), var(--gk-link-opacity, 1)) !important;
   text-decoration-color: RGBA(var(--gk-emphasis-color-rgb), var(--gk-link-underline-opacity, .75)) !important
 }
 

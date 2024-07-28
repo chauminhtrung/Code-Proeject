@@ -1,5 +1,6 @@
 package com.example.asm_java6.Config;
 
+import com.example.asm_java6.ServiceImp.JwtAuthenticationEntryPoint;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,7 +21,7 @@ public class SercurityConfig {
         return http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/order/**").authenticated()
-                        .requestMatchers("/admin/**").hasAnyRole("STAF","DIRE")
+                        .requestMatchers("/manager/**").hasAnyRole("STAF","DIRE")
                         .requestMatchers("/rest/authorities").hasRole("DIRE")
                         .anyRequest().permitAll()
 
@@ -33,9 +34,11 @@ public class SercurityConfig {
                         .failureUrl("/security/login/error")
                         .usernameParameter("username")
                         .passwordParameter("password")
+
                 )
 
                 .logout(config -> config.logoutSuccessUrl("/home"))
+                .exceptionHandling((exception)-> exception.authenticationEntryPoint(new JwtAuthenticationEntryPoint()).accessDeniedPage("/error/accedd-denied"))
                 .build();
     }
 
