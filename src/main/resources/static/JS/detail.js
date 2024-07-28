@@ -38,6 +38,13 @@ const detail2 = async () => {
                   <span class="text-dark fw-bold h2">$ ${product.price}</span>
                   <del class="fs-4">$750</del>
                 </div>
+                
+               <div class="card-body">
+                <div class="d-grid">
+                  <a onclick="addCart(${product.id})" class="btn btn-primary mb-2">Start Free Month</a>
+                  <a href="#" class="btn btn-outline-primary">Get Full Access</a>
+                </div>
+              </div>
     `;
     container.insertAdjacentHTML('beforeend', html);
   } catch (error) {
