@@ -28,15 +28,7 @@ const addCart = async (id) => {
     viewCart(cart);
 }
 
-//Hàm đếm sl//
-const Cartcount = cart.length;
-// document.getElementById('cart-count').textContent = Cartcount;
 
-const SumPrice = cart.map(item => item.qty * item.prolist.price)
-    .reduce((total,qty) => total+=qty,0);
-const formatPrice = SumPrice.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-const sum = "SUM: "+ formatPrice +" đ";
-document.getElementById('cart-sumPrice').textContent = sum;
 
 const viewCart = (shoppingCart) =>{
 
@@ -51,7 +43,9 @@ const viewCart = (shoppingCart) =>{
                 <td>${item.prolist.name}</td>
                 <td>${item.prolist.price.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</td>
               
-                <td><button class="btn btn-danger" onclick="removeItem(${item.prolist.id})">Del</button></td>
+                <td>
+                    <a class="text-danger" href=""><i class="bi bi-trash3" onclick="removeItem(${item.prolist.id})"></i></a>
+                </td>
             </tr>
             </tbody>`
                 /*<td>
@@ -60,7 +54,15 @@ const viewCart = (shoppingCart) =>{
                 <button class="btn-qty" onclick="increaseQuantity(this)">+</button>
                 </td>*/
     })
+//Hàm đếm sl//
 
+// document.getElementById('cart-count').textContent = Cartcount;
+
+    const SumPrice = cart.map(item => item.qty * item.prolist.price)
+        .reduce((total,qty) => total+=qty,0);
+    const formatPrice = SumPrice.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    const sum =  formatPrice +" đ";
+    document.getElementById('cart-sumPrice').textContent = sum;
 
 }
 
@@ -76,6 +78,7 @@ const removeItem = id =>{
 
 /* Hàm này để đây đừng xóa nhé tôi ơi */
 
+    //giảm qty
 // function decreaseQuantity(button) {
 //     const inputField = button.nextElementSibling;
 //     let qty = parseInt(inputField.value);
@@ -85,7 +88,8 @@ const removeItem = id =>{
 //         updateCartItem(id, qty - 1);
 //     }
 // }
-//
+
+// tăng qty
 // function increaseQuantity(button) {
 //     const inputField = button.previousElementSibling;
 //     let qty = parseInt(inputField.value);
@@ -93,6 +97,8 @@ const removeItem = id =>{
 //     const id = inputField.dataset.id;
 //     updateCartItem(id, qty + 1);
 // }
+
+// lưu qty updated vào localstorage
 // function updateCartItem(id, qty) {
 //     let storage = localStorage.getItem('cart');
 //
@@ -108,3 +114,45 @@ const removeItem = id =>{
 // }
 
 viewCart(cart);
+function checkout(){
+    let account = document.getElementById('username').value;
+    let address = document.getElementById('address').value;
+    let creationDate = document.getElementById('datenow').value;
+
+    let createOrder = {
+        address: address,
+        createDate: creationDate,
+        account: {username: account},
+        orderDetail:{
+            product: {id:cart.map(item => item.prolist.id)},
+            price: cart.map(item => item.prolist.price),
+            quantity: cart.map(item => item.qty)
+        }
+
+    };
+
+    console.table(createOrder);
+    axios.post('/rest-orders/createOrder', createOrder)
+        .then(resp=>{
+            if (resp.data.success){
+                alert("dat thanh cong2");
+            }
+            alert("dat thanh cong");
+            // cart.clear();
+            // location.href = "/order/detail/" + resp.data.id;
+    }).catch(err =>{
+        console.log(err);
+    })
+}
+
+// const checkout = async () =>{
+//
+//     const data ={
+//         address : document.getElementById('address').value,
+//         creationDate : document.getElementById('datenow').value,
+//         account :{username: document.getElementById('username').value},
+//     }
+//     axios.post('/rest-orders',data);
+//     console.table(data);
+//     console.log(data);
+// }

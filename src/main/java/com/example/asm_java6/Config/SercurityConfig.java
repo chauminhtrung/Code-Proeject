@@ -38,7 +38,6 @@ public class SercurityConfig {
                 )
 
                 .logout(config -> config.logoutSuccessUrl("/home"))
-                .exceptionHandling((exception)-> exception.authenticationEntryPoint(new JwtAuthenticationEntryPoint()).accessDeniedPage("/error/accedd-denied"))
                 .build();
     }
 

@@ -8,18 +8,29 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @Controller
-public class CartController {
+public class OrderController {
     @Autowired
     AccountDao accountDao;
 
-    @RequestMapping("/cart/view")
-    public String viewCart(Model model, Authentication auth) {
+//    @RequestMapping("/cart/order")
+//    public String oderCart(Model model, Authentication auth) {
+//        String userEmail = auth.getName();
+//        Account account = accountDao.findAccountsByUsername(userEmail);
+//        model.addAttribute("orders", account);
+//        return "cart/view";
+//    }
+    @RequestMapping("/order/detail/{id}")
+    public String oderdetail(Model model, Authentication auth) {
         String userEmail = auth.getName();
         Account account = accountDao.findAccountsByUsername(userEmail);
         model.addAttribute("orders", account);
-        return "cart/view";
+        return "order/orderDetail";
     }
-
-
+    @RequestMapping("/order/list")
+    public String orderlist() {
+        return "order/orderlist";
+    }
 }

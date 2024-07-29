@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic(~{::body})}" xmlns:sec="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>OrderDetail</title>
+</head>
+<body>
+<div class=" col-10">
+    <h2>Oder</h2>
+    <input type="text" class="mb-1" th:value="${#authentication.name}" readonly>
+    <input type="text" class="mb-1" th:value="${#temporals.format(#temporals.createNow(), 'yyyy-MM-dd - HH:mm:ss')}" readonly>
+    <table class="table" id="cartbody">
+
+    </table>
+    <h2><span id="cart-sumPrice"></span></h2>
+    <button class="btn btn-danger">Pay now</button>
+</div>
+<script src="/JS/shoppingCart.js"></script>
+</body>
+</html>
