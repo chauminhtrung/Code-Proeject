@@ -24,14 +24,14 @@ public class OrderServiceImp implements OrderService {
     OrderDetailDao orderDetailDao;
 
     @Override
-    public Order create(Order orderData) {
+    public Order create(JsonNode orderData) {
         ObjectMapper mapper = new ObjectMapper();
 
         Order order = mapper.convertValue(orderData, Order.class);
         orderDao.save(order);
 
         TypeReference<List<OrderDetail>> type = new TypeReference<List<OrderDetail>>() {};
-        List<OrderDetail> orderDetails = mapper.convertValue(orderData.getOrderDetails(), type)
+        List<OrderDetail> orderDetails = mapper.convertValue(orderData.get("orderDetails"), type)
                 .stream().peek(d -> d.setOrder(order)).collect(Collectors.toList());
         orderDetailDao.saveAll(orderDetails);
 
@@ -41,5 +41,10 @@ public class OrderServiceImp implements OrderService {
     @Override
     public List<Order> getOrders() {
         return orderDao.findAll();
+    }
+
+    @Override
+    public Order findById(Long id) {
+        return orderDao.findById(id).get();
     }
 }

@@ -7,7 +7,9 @@ import java.util.List;
 
 public interface OrderService {
 
-    Order create(Order orderData);
+    Order create(JsonNode orderData);
 
     List<Order> getOrders();
+
+    Order findById(Long username);
 }

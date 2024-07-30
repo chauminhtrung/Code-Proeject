@@ -1,6 +1,8 @@
 package com.example.asm_java6.API;
 
+import com.example.asm_java6.Dao.OrderDao;
 import com.example.asm_java6.Model.Order;
+import com.example.asm_java6.Model.Product;
 import com.example.asm_java6.Service.OrderService;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,7 @@ public class OrderAPI {
     @Autowired
     OrderService orderService;
 
+
     @Autowired
     private DispatcherServlet dispatcherServlet;
 
@@ -31,17 +34,8 @@ public class OrderAPI {
         }
     }
 
-    @GetMapping("/getAllCourse")
-    public ResponseEntity<?> doGetAllCourse() {
-        Map<String, Object> result = new HashMap<>();
-        result.put("success", true);
-        result.put("message", "Call Api Success");
-        result.put("data", orderService.getOrders());
-        return ResponseEntity.ok(result);
-    }
-
     @PostMapping("/createOrder")
-    public ResponseEntity<?> crateOrder(@RequestBody Order orderData) {
+    public ResponseEntity<?> crateOrder(@RequestBody JsonNode orderData) {
         Map<String, Object> result = new HashMap<>();
         try {
             result.put("success", true);
@@ -58,4 +52,6 @@ public class OrderAPI {
         checkMappings();
         return ResponseEntity.ok(result);
     }
-}
+
+
+    }

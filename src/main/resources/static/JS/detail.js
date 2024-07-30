@@ -17,6 +17,8 @@ const detail1 = async () => {
     container.innerHTML = '<p>Có lỗi xảy ra khi gọi API.</p>';
   }
 };
+
+
 const detail2 = async () => {
   const container = document.getElementById('detail1'); // Lấy phần tử mới để hiển thị hình ảnh
   const urlParams = new URLSearchParams(window.location.search);

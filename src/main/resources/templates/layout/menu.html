@@ -96,10 +96,7 @@
                         <div class="dropdown-divider"></div>
                         <ul class="list-unstyled">
                             <li >
-                                <form   method="post" action="/logout">
-                                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-                                    <button type="" class="btn btn-default "><i class="fa-solid fa-right-from-bracket m-2" ></i>  Logout</button>
-                                </form>
+                                <a class="dropdown-item" th:href="@{/security/logoff}"><i class="fa-solid fa-right-from-bracket m-2" ></i>Log Out</a>
                             </li>
                         </ul>
                     </div>
