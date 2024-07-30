@@ -33,5 +33,11 @@ public class ManagerController {
         return "manager/ManagerAuthorities";
     }
 
+    //EDIT
+    @RequestMapping("/manager/EditProducts")
+    public String EditProducts(Model model) {
+        return "manager/EditProduct";
+    }
+
 
 }
