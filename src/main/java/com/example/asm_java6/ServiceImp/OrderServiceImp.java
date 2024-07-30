@@ -1,7 +1,7 @@
 package com.example.asm_java6.ServiceImp;
 
-import com.example.asm_java6.Dao.OrderDao;
-import com.example.asm_java6.Dao.OrderDetailDao;
+import com.example.asm_java6.Repo.OrderDao;
+import com.example.asm_java6.Repo.OrderDetailDao;
 import com.example.asm_java6.Model.Order;
 import com.example.asm_java6.Model.OrderDetail;
 import com.example.asm_java6.Service.OrderService;
@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
 @Service

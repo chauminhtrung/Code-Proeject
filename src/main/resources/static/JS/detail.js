@@ -37,8 +37,7 @@ const detail2 = async () => {
                   </a>
                 </div>
                 <div class="ms-4 mt-2">
-                  <span class="text-dark fw-bold h2">$ ${product.price}</span>
-                  <del class="fs-4">$750</del>
+                  <span class="text-dark fw-bold h2">${product.price.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</span>
                 </div>
                 
                <div class="card-body">
@@ -85,7 +84,6 @@ const category = async () => {
           <a class="dropdown-item fs-6" data-bs-toggle="dropdown" aria-expanded="false" data-category-id="${cate.id}">  
             <div class="d-flex">  
               <p>${cate.name}</p>  
-
               <b class="ms-auto"><i class="bi bi-chevron-right"></i></b>  
             </div>  
           </a>  

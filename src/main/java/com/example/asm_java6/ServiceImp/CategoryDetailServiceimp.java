@@ -1,6 +1,6 @@
 package com.example.asm_java6.ServiceImp;
 
-import com.example.asm_java6.Dao.CategoryDetailDao;
+import com.example.asm_java6.Repo.CategoryDetailDao;
 import com.example.asm_java6.Model.CategoryDetail;
 import com.example.asm_java6.Service.CategoryDetailService;
 import java.util.List;

@@ -6,29 +6,42 @@
 
 </head>
 <body>
-    <h2 class="text-center">Manager Accounts</h2>
-    <div class="container" >
-
-
-        <div style="margin-left: 20px;overflow-y: scroll;height: 500px;">
-            <table class="table">
-                <thead style="top: 0px;position: sticky;background:#f1f5f9">
-                <tr class="text-center">
-                    <th>Username</th>
-                    <th>Password</th>
-                    <th>Fullname</th>
-                    <th>email</th>
-                    <th>photo</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-<!--                fill o day-->
-                <tbody id="TableAccount" >
-                </tbody>
-            </table>
+<div class="bg-white p-4 rounded m-4" style="overflow-y: scroll;height: 600px; width: 1200px">
+    <div class="table-responsive">
+        <div class="d-flex">
+            <form class="mt-3 mt-lg-0 ms-lg-3 d-flex align-items-center">
+        <span class="position-absolute ps-3 search-icon">
+         <i class="fa-solid fa-magnifying-glass"></i>
+        </span>
+                <label for="search" class="visually-hidden"></label>
+                <input type="search" id="search" class="form-control ps-6" placeholder="Tìm kiếm khóa học">
+            </form>
+            <div class="ms-auto">
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>Bộ lọc</option>
+                    <option value="1">Giá tiền</option>
+                    <option value="2">Ngày tạo</option>
+                    <option value="3">Loại khóa học</option>
+                </select>
+            </div>
         </div>
+        <table class="table">
+            <thead class="bg-transparent">
+            <tr class="text-center">
+                <th>Username</th>
+                <th>Password</th>
+                <th>Fullname</th>
+                <th>email</th>
+                <th>photo</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody id="TableAccount">
+            <!-- Dữ liệu sẽ được chèn vào đây từ JavaScript -->
+            </tbody>
+        </table>
     </div>
-
+</div>
     <script src="/JS/account.js"></script>
 </body>
 </html>

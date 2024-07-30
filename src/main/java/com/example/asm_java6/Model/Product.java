@@ -11,27 +11,29 @@ import java.util.List;
 
 
 @Data
-@Entity @Table(name = "Products")
-public class Product  implements Serializable{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id;
-    String name;
-    String image;
-    Double price;
-    @Temporal(TemporalType.DATE)
-    @Column(name = "Createdate")
-    Date createDate = new Date();
-    Boolean available;
+@Entity
+@Table(name = "Products")
+public class Product implements Serializable {
 
-    @ManyToOne
-    @JoinColumn(name = "Categorydeid")
-    CategoryDetail categoryde;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  Integer id;
+  String name;
+  String image;
+  Double price;
+  @Temporal(TemporalType.DATE)
+  @Column(name = "Createdate")
+  Date createDate = new Date();
+  Boolean available;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "product")
-    List<OrderDetail> orderDetails;
-    int qty=0;
+  @ManyToOne
+  @JoinColumn(name = "Categorydeid")
+  CategoryDetail categoryde;
 
-    String mota;
+  @JsonIgnore
+  @OneToMany(mappedBy = "product")
+  List<OrderDetail> orderDetails;
+  int qty = 0;
+
+  String mota;
 }

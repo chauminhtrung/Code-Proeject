@@ -1,7 +1,7 @@
 package com.example.asm_java6.ServiceImp;
 
 
-import com.example.asm_java6.Dao.AccountDao;
+import com.example.asm_java6.Repo.AccountDao;
 import com.example.asm_java6.Model.Account;
 import com.example.asm_java6.Service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;

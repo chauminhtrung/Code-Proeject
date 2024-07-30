@@ -1,9 +1,7 @@
 package com.example.asm_java6.ServiceImp;
 
-import com.example.asm_java6.Dao.CategoryDao;
-import com.example.asm_java6.Dao.ProductDao;
+import com.example.asm_java6.Repo.CategoryDao;
 import com.example.asm_java6.Model.Category;
-import com.example.asm_java6.Model.Product;
 import com.example.asm_java6.Service.CategoryService;
 import java.util.List;
 import java.util.Optional;
