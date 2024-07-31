@@ -34,6 +34,5 @@ public class Product implements Serializable {
   @OneToMany(mappedBy = "product")
   List<OrderDetail> orderDetails;
   int qty = 0;
-
   String mota;
 }

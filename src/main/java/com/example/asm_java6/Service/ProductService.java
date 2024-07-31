@@ -17,4 +17,8 @@ public interface ProductService {
 
   @Transactional
   List<Product> getProductsByCategoryId(String categoryId);
+
+  @Transactional
+  Product addProduct(Product product);
+
 }

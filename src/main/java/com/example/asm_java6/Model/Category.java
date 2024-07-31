@@ -17,8 +17,4 @@ public class Category implements Serializable{
     @Id
     String id;
     String name;
-//    @JsonIgnore
-//    @OneToMany(mappedBy = "category")
-//    List<CategoryDetail> categoryDetails;
-
 }

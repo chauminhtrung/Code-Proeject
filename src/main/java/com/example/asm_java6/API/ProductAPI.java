@@ -1,16 +1,14 @@
 package com.example.asm_java6.API;
 
+import com.example.asm_java6.Model.Product;
 import com.example.asm_java6.Service.CategoryService;
 import com.example.asm_java6.Service.ProductService;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api-product")
@@ -20,6 +18,8 @@ public class ProductAPI {
   private ProductService productService;
   @Autowired
   private CategoryService categoryService;
+
+
 
   @GetMapping("/get-all-product")
   public ResponseEntity<?> getAllProduct() {
@@ -97,5 +97,37 @@ public class ProductAPI {
       rs.put("data", null);
     }
     return ResponseEntity.ok(rs);
+  }
+
+  @GetMapping("/edit-product")
+  public ResponseEntity<?> getProductByIdManager(@RequestParam("id") Integer id) {
+    Map<String, Object> rs = new HashMap<>();
+    try {
+      rs.put("status", true);
+      rs.put("message", "Call api success");
+      rs.put("data", productService.findProductById(id));
+    } catch (Exception ex) {
+      rs.put("status", false);
+      rs.put("message", "Call api failed");
+      rs.put("data", null);
+    }
+    return ResponseEntity.ok(rs);
+  }
+
+  @PostMapping("/add-product")
+  public ResponseEntity<?> addProduct(@RequestBody Product product) {
+    Map<String, Object> rs = new HashMap<>();
+    try {
+      Product createdProduct = productService.addProduct(product);
+      rs.put("status", true);
+      rs.put("message", "Call api success");
+      rs.put("data", createdProduct);
+      return ResponseEntity.status(HttpStatus.CREATED).body(rs);
+    } catch (Exception ex) {
+      rs.put("status", false);
+      rs.put("message", "Call api failed: " + ex.getMessage());
+      rs.put("data", null);
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(rs);
+    }
   }
 }

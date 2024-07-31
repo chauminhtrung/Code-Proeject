@@ -4,6 +4,7 @@ import org.apache.catalina.Manager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ManagerController {
@@ -33,11 +34,14 @@ public class ManagerController {
         return "manager/ManagerAuthorities";
     }
 
-    //EDIT
+//    EDIT Product
+    @RequestMapping("/edit/id")
+    public String edit(@RequestParam("id") Integer id) {
+        return "forward:/manager/ManagerProducts";
+    }
+//    ADD Product
     @RequestMapping("/manager/EditProducts")
-    public String EditProducts(Model model) {
+    public String AddProduct(Model model) {
         return "manager/EditProduct";
     }
-
-
 }

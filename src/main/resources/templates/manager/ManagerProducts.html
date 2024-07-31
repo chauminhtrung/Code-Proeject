@@ -7,40 +7,64 @@
 <link rel="stylesheet" href="/CSS/detail.css">
 <body>
 <div class="bg-white p-4 rounded m-4" style="overflow-y: scroll;height: 600px; width: 1200px">
-  <div class="table-responsive">
+  <div>
+    <!-- Tabs navs -->
     <div class="d-flex">
-      <form class="mt-3 mt-lg-0 ms-lg-3 d-flex align-items-center">
-        <span class="position-absolute ps-3 search-icon">
-         <i class="fa-solid fa-magnifying-glass"></i>
-        </span>
-        <label for="search" class="visually-hidden"></label>
-        <input type="search" id="search" class="form-control ps-6" placeholder="Tìm kiếm khóa học">
-      </form>
-     <div class="ms-auto">
-       <select class="form-select" aria-label="Default select example">
-         <option selected>Bộ lọc</option>
-         <option value="1">Giá tiền</option>
-         <option value="2">Ngày tạo</option>
-         <option value="3">Loại khóa học</option>
-       </select>
-     </div>
+      <ul class="nav nav-tabs" id="ex1-tabs" role="tablist">
+        <li class="nav-item" role="presentation">
+          <a class="nav-link active" id="ex1-tab-1" data-bs-toggle="tab" href="#ex1-tabs-1" role="tab" aria-controls="ex1-tabs-1" aria-selected="true">Product List</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" id="ex1-tab-2" data-bs-toggle="tab" href="#ex1-tabs-2" role="tab" aria-controls="ex1-tabs-2" aria-selected="false">Edit Product</a>
+        </li>
+      </ul>
+
     </div>
-    <table class="table">
-      <thead class="bg-transparent">
-      <tr class="text-center">
-        <th>ID</th>
-        <th>Tên khóa học</th>
-        <th>Hình ảnh</th>
-        <th>Giá</th>
-        <th>Ngày tạo</th>
-        <th>Loại</th>
-        <th>Actions</th>
-      </tr>
-      </thead>
-      <tbody id="productManager">
-      <!-- Dữ liệu sẽ được chèn vào đây từ JavaScript -->
-      </tbody>
-    </table>
+    <!-- Tabs navs -->
+
+    <!-- Tabs content -->
+    <div class="tab-content" id="ex1-content">
+      <div class="tab-pane fade show active" id="ex1-tabs-1" role="tabpanel" aria-labelledby="ex1-tab-1">
+
+        <div class="d-flex position-relative" style="margin-left: 720px; margin-top: -39px;">
+          <form class="d-flex align-items-center ms-auto">
+        <span class="position-absolute ps-3 search-icon">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </span>
+            <label for="search" class="visually-hidden"></label>
+            <input type="search" id="search" class="form-control ps-6" placeholder="Tìm kiếm khóa học">
+          </form>
+          <div class="ms-3">
+            <select class="form-select" aria-label="Default select example">
+              <option selected>Bộ lọc</option>
+              <option value="1">Giá tiền</option>
+              <option value="2">Ngày tạo</option>
+              <option value="3">Loại khóa học</option>
+            </select>
+          </div>
+        </div>
+
+        <table class="table">
+          <thead class="bg-transparent">
+          <tr class="text-center">
+            <th>ID</th>
+            <th>Tên khóa học</th>
+            <th>Hình ảnh</th>
+            <th>Giá</th>
+            <th>Ngày tạo</th>
+            <th>Loại</th>
+            <th>Actions</th>
+          </tr>
+          </thead>
+          <tbody id="productManager">
+          <!-- Dữ liệu sẽ được chèn vào đây từ JavaScript -->
+          </tbody>
+        </table>
+      </div>
+      <div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-2">
+        <div id="editProductForm"></div>
+      </div>
+    </div>
   </div>
 </div>
 <script src="/JS/productManager.js"></script>
