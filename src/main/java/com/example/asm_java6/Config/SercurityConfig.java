@@ -19,7 +19,6 @@ public class SercurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/order/**").authenticated()
                         .requestMatchers("/manager/**").hasAnyRole("STAF","DIRE")
@@ -38,6 +37,7 @@ public class SercurityConfig {
 
                 )
 
+                .logout(config -> config.logoutSuccessUrl("/home"))
                 .logout(config -> config.logoutSuccessUrl("/home").logoutUrl("/security/logoff"))
                 .exceptionHandling((exception)-> exception.authenticationEntryPoint(new JwtAuthenticationEntryPoint()).accessDeniedPage("/error/accedd-denied"))
                 .csrf((csrf) -> csrf.disable())

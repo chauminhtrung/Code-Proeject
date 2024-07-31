@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic(~{::body})}"
+      xmlns:sec="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My Order List</title>
+</head>
+<body>
+<div class=" col-10">
+    <div class="container">
+        <div class="bg-colors-gradient text-center"><h2 class="p-2">YOUR ORDERS PURCHASED</h2></div>
+        <div style="height: 600px; overflow-y: scroll">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">No.</th>
+                    <th scope="col">Order ID</th>
+                    <th scope="col">CreateDate</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">View</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="order, state:${orders}">
+                    <th scope="row">[[${state.index}]]</th>
+                    <td>[[${order.id}]]</td>
+                    <td>[[${order.createDate}]]</td>
+                    <td th:text="${#aggregates.sum(order.orderDetails.![quantity])}"></td>
+                    <td><a href="" class="view-order" th:data-id="${order.id}"><i class="bi bi-eye text-dark-success" ></i></a></td>
+                </tr>
+                </tbody>
+            </table>
+            <div id="order-modal">
+                <h2 class="modal-title"></h2>
+                <div class="modal-body"></div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="/JS/orderdetail.js"></script>
+</body>
+</html>

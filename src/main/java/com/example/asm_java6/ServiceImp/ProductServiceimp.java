@@ -35,8 +35,6 @@ public class ProductServiceimp implements ProductService {
     return productDao.findByCategoryId(categoryId);
   }
 
-  @Override
-  public Product Save(Product pro) {
-    return productDao.save(pro);
-  }
+
+
 }

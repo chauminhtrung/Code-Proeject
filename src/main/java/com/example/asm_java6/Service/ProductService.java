@@ -17,8 +17,4 @@ public interface ProductService {
 
   @Transactional
   List<Product> getProductsByCategoryId(String categoryId);
-
-  @Transactional
-  Product Save(Product pro);
-
 }

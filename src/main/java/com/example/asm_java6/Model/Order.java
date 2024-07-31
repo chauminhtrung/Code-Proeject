@@ -1,6 +1,7 @@
 package com.example.asm_java6.Model;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -20,6 +21,7 @@ public class Order  implements Serializable{
     String address;
     @Temporal(TemporalType.DATE)
     @Column(name = "Createdate")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSX")
     Date createDate = new Date();
     @ManyToOne
     @JoinColumn(name = "Username")
@@ -27,4 +29,8 @@ public class Order  implements Serializable{
     @JsonIgnore
     @OneToMany(mappedBy = "order")
     List<OrderDetail> orderDetails;
+
+    public void setId(int i) {
+
+    }
 }

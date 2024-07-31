@@ -28,13 +28,12 @@ public class OrderServiceImp implements OrderService {
 
         Order order = mapper.convertValue(orderData, Order.class);
         orderDao.save(order);
-
+        System.out.println("Add order thành công"+order);
         TypeReference<List<OrderDetail>> type = new TypeReference<List<OrderDetail>>() {};
         List<OrderDetail> orderDetails = mapper.convertValue(orderData.get("orderDetails"), type)
                 .stream().peek(d -> d.setOrder(order)).collect(Collectors.toList());
         orderDetailDao.saveAll(orderDetails);
-
-        return order;
+        return orderDao.save(order);
     }
 
     @Override
@@ -46,4 +45,18 @@ public class OrderServiceImp implements OrderService {
     public Order findById(Long id) {
         return orderDao.findById(id).get();
     }
+
+    @Override
+    public List<Order> findOrderByAccount_Username(String username) {
+        List<Order> orders = orderDao.findOrderByAccount_Username(username);
+        orders.sort((o1, o2) -> o2.getId().compareTo(o1.getId()));
+        return orders;
+    }
+
+    @Override
+    public List<OrderDetail> getOrderDetailsByOrderId(long id) {
+        return orderDao.findById(id).get().getOrderDetails();
+    }
+
+
 }

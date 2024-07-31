@@ -1,91 +1,71 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org"
-      th:fragment="dynamic(view)">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org" th:fragment="dynamic(view)">
 <head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-  <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
-  <link rel="stylesheet" href="/CSS/theme.min.css">
-  <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/CSS/detail.css">
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <link rel="stylesheet" href="/CSS/theme.min.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/CSS/detail.css">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <a class="navbar-brand" href="/home"><img src="/IMG/logo.png" width="120"></a>
-  <div style="margin-left: 150px">
-    <h1 class="d-flex flex-column text-dark fw-bolder fs-3 mb-0">Quản Lý</h1>
-    <ul
-        class="breadcrumb fw-bold fs-7 pt-1">
-      <li class="breadcrumb-item text-muted"><a
-          href="/admin/product" class="text-muted text-hover-primary">Vai trò: Admin</a></li>
-    </ul>
-  </div>
-</nav>
-<div class="row">
-  <div class="sidebar_column col-2 d-flex flex-column flex-shrink-0 p-4 text-bg-dark"
-       style="width: 280px;">
-    <ul class="nav nav-pills flex-column mb-auto mt-2">
-      <li class="text-uppercase text-secondary fw-bold mb-3 ms-1 ">Quản lý</li>
-      <li class="nav-item">
-        <a href="/manager/ManagerProducts" class="nav-link active" aria-current="page">
-          <i class="fa-solid fa-hippo me-2" width="16" height="16"></i>
-          Products
-        </a>
-      </li>
-      <li>
-        <a href="/manager/Accounts" class="nav-link link-body-emphasis text-white">
-          <i class="fa-solid fa-users-gear me-2" width="16" height="16"></i>
-          Accounts
-        </a>
-      </li>
-      <li>
-        <a href="/manager/Orders" class="nav-link link-body-emphasis text-white">
-          <i class="fa-solid fa-cart-shopping me-2" width="16" height="16"></i>
-          Orders
-        </a>
-      </li>
-      <li>
-        <a href="/manager/Authorities" class="nav-link link-body-emphasis text-white">
-          <i class="fa-solid fa-shield-halved me-2" width="16" height="16"></i>
-          Authorities
-        </a>
-      </li>
-      <li class="text-uppercase text-secondary fw-bold mb-3 ms-1 ">EDIT</li>
-      <li>
-        <a href="#" class="nav-link link-body-emphasis text-white">
-          <i class="bi bi-pencil-square me-2" width="16" height="16"></i>
-          Chỉnh sửa sản phẩm
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link link-body-emphasis text-white">
-          <i class="bi bi-pencil-square me-2" width="16" height="16"></i>
-          Chỉnh sửa người dùng
-        </a>
-      </li>
-    </ul>
-  </div>
-  <div class="col-9">
-    <div class="text-center mt-4" th:text="${message}"></div>
-    <div th:replace="${view}"></div>
-  </div>
-</div>
+    <nav>
+        <div th:replace="/layout/menu"></div>
+    </nav>
+    <div class="row">
+        <div class="sidebar_column col-2 d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 280px;">
+            <hr>
+            <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item">
+                    <a href="/manager/ManagerProducts" class="nav-link active" aria-current="page">
+                        <i class="fa-solid fa-hippo me-2" width="16" height="16"></i>
+                        Products
+                    </a>
+                </li>
+                <li>
+                    <a href="/manager/Accounts" class="nav-link link-body-emphasis text-white">
+                        <i class="fa-solid fa-users-gear me-2" width="16" height="16"></i>
+                        Accounts
+                    </a>
+                </li>
+                <li>
+                    <a href="/manager/Orders" class="nav-link link-body-emphasis text-white">
+                        <i class="fa-solid fa-cart-shopping me-2" width="16" height="16"></i>
+                        Orders
+                    </a>
+                </li>
+                <li>
+                    <a href="/manager/Authorities" class="nav-link link-body-emphasis text-white">
+                        <i class="fa-solid fa-shield-halved me-2" width="16" height="16"></i>
+                        Authorities
+                    </a>
+                </li>
+
+            </ul>
+            <hr>
+
+        </div>
+        <div class="col-9">
+            <div class="text-center mt-4" th:text="${message}"></div>
+            <div th:replace="${view}"></div>
+        </div>
+    </div>
 
 
-<footer>
-  <div th:replace="/layout/footer"></div>
-</footer>
+    <footer>
+        <div th:replace="/layout/footer"></div>
+    </footer>
 
 
-<!-- Axios -->
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<!-- jQuery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
+    <!-- Axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous"></script>
 </body>
 </html>
