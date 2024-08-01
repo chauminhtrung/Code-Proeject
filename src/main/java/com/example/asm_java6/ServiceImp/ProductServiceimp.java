@@ -37,6 +37,11 @@ public class ProductServiceimp implements ProductService {
   }
 
   @Override
+  public List<Product> findByCategoryDetailId(String categoryDetailId) {
+    return productDao.findByCategorydeId(categoryDetailId);
+  }
+
+  @Override
   public Product addProduct(Product product) {
     return productDao.save(product);
   }

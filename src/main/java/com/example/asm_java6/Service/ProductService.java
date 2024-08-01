@@ -19,6 +19,9 @@ public interface ProductService {
   List<Product> getProductsByCategoryId(String categoryId);
 
   @Transactional
+  List<Product> findByCategoryDetailId(String categoryDetailId);
+
+  @Transactional
   Product addProduct(Product product);
 
   @Transactional

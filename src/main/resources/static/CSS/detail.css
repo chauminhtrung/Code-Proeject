@@ -25,3 +25,14 @@ a {
   background-color: transparent;
   border: none;
 }
+.nav-tabs {
+  border: none; /* Removes the border from the tab container */
+}
+
+.nav-tabs .nav-link {
+  border: none; /* Removes borders from individual tabs */
+}
+
+.nav-tabs .nav-link.active {
+  border-bottom: 2px solid transparent;
+}

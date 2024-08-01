@@ -1,3 +1,4 @@
+/* jshint esversion: 8 */
 const detail1 = async () => {
   const container = document.getElementById('detailProduct');
   const urlParams = new URLSearchParams(window.location.search);
@@ -18,7 +19,6 @@ const detail1 = async () => {
   }
 };
 
-
 const detail2 = async () => {
   const container = document.getElementById('detail1'); // Lấy phần tử mới để hiển thị hình ảnh
   const urlParams = new URLSearchParams(window.location.search);
@@ -37,7 +37,8 @@ const detail2 = async () => {
                   </a>
                 </div>
                 <div class="ms-4 mt-2">
-                  <span class="text-dark fw-bold h2">${product.price.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</span>
+                  <span class="text-dark fw-bold h2">${product.price.toFixed(
+        0).replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</span>
                 </div>
                 
                <div class="card-body">
@@ -57,53 +58,89 @@ document.addEventListener('DOMContentLoaded', detail1);
 document.addEventListener('DOMContentLoaded', detail2);
 
 
+
 //=============================DETAIL-CATEGORIES================================
 
-const category = async () => {
-  let productContainer = $('#category');
-
-  const getCategoryDetails = async (categoryId, dropdownMenu) => {
-    try {
-      const response = await axios.get(`/api-category/category-detail?categoryId=${categoryId}`);
-      dropdownMenu.html('');
-      response.data.data.forEach(categoryDetail => {
-        dropdownMenu.append(`<li class="mt-2"><a class="dropdown-item fs-6" href="#">${categoryDetail.name}</a></li>`);
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  await axios.get('/api-category/get-all-category').then(response => {
-    productContainer.html('');
-    response.data.data.forEach(cate => {
-      let dropdownMenu = $('<ul class="dropdown-menu bg-light" style="width: 320px;height: 637px;"></ul>');
-
-      let listItem = $(`  
-        <li class="dropend mt-3">  
-          <a class="dropdown-item fs-6" data-bs-toggle="dropdown" aria-expanded="false" data-category-id="${cate.id}">  
-            <div class="d-flex">  
-              <p>${cate.name}</p>  
-              <b class="ms-auto"><i class="bi bi-chevron-right"></i></b>  
-            </div>  
-          </a>  
-        </li>  
-      `);
-
-      listItem.append(dropdownMenu);
-
-      productContainer.append(listItem);
-
-      listItem.on('click', async function() {
-        await getCategoryDetails(cate.id, dropdownMenu);
-      });
-    });
-  })
-  .catch(error => {
-    alert(error);
+const loadProductDetails = async (productId) => {
+  const pro = $(`#productDetail-${productId}`);
+  const response = await axios.get(`/api-product/get-products-by-category-detail?categoryDetailId=${productId}`);
+  const productDetails = response.data.data;
+  console.log(productDetails)
+  productDetails.forEach(product => {
+    const detailProduct = $(`  
+                <li class="nav-item mt-3">  
+                    <a href="#" class="nav-link text-dark click-detail" data-id="${product.id}">${product.name} </a> 
+                </li>  
+            `);
+    pro.append(detailProduct);
   });
-}
-// Gọi hàm category khi trang được tải
-document.addEventListener('DOMContentLoaded', category);
+  $('.click-detail').click(function () {
+    const id = $(this).data('id');
+    window.location.href = `/detail/id?id=${id}`;
+  });
+};
+
+const loadCategories = async () => {
+  const dropdownMenu = $('#categoryDropdown');
+  try {
+    const response = await axios.get('/api-category/get-all-category');
+    const categories = response.data.data;
+    categories.forEach(category => {
+      const listItem = $(`  
+                <li class="nav-item mt-3">  
+                    <div class="dropend mt-3">  
+                        <a href="#" type="button" class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown"  
+                           aria-expanded="false" data-bs-auto-close="outside" data-category-id="${category.id}">  
+                           ${category.name}  
+                        </a>  
+                        <ul id="category-detail-${category.id}" class="dropdown-menu rounded bg-light" style="width: 330px; height: 637px;">  
+                        </ul>  
+                    </div>  
+                </li>  
+            `);
+
+      // Thêm sự kiện click cho danh mục
+      listItem.find('a.dropdown-item').on('click', async (event) => {
+        const categoryId = $(event.currentTarget).data('category-id');
+        const submenu = $(`#category-detail-${categoryId}`);
+        const response = await axios.get(`/api-category/category-detail?categoryId=${categoryId}`);
+        const categoryDetails = response.data.data;
+        console.log(categoryDetails)
+        categoryDetails.forEach(detail => {
+          const detailItem = $(`  
+                            <li class="nav-item mt-3">  
+                                <div class="dropend mt-3">  
+                                    <a href="#" type="button" class="dropdown-item dropdown-toggle productDetail"  data-bs-toggle="dropdown" 
+                                       data-categorydetail-id="${detail.id}">  
+                                       ${detail.name}  
+                                    </a>  
+                                    <ul id="productDetail-${detail.id}" class="dropdown-menu rounded bg-light" style="width: 330px; height: 637px;">  
+                                    </ul>  
+                                </div>  
+                            </li>  
+                        `);
+          submenu.append(detailItem);
+        });
+        // Gán sự kiện cho các mục sản phẩm
+        submenu.find('.productDetail').on('click', async (e) => {
+          const productId = $(e.currentTarget).data('categorydetail-id');
+          await loadProductDetails(productId); // Gọi hàm loadProductDetails khi nhấn vào sản phẩm
+        });
+      });
+      dropdownMenu.append(listItem);
+    });
+
+  } catch (error) {
+    console.error(error);
+    dropdownMenu.html('<p>Có lỗi xảy ra khi gọi API.</p>');
+  }
+};
+
+document.addEventListener('DOMContentLoaded', loadCategories);
+
+
+
+
+
 
 

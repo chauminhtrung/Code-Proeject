@@ -99,6 +99,23 @@ public class ProductAPI {
     return ResponseEntity.ok(rs);
   }
 
+  @GetMapping("/get-products-by-category-detail")
+  public ResponseEntity<?> getProductsByCategoryDetailId(@RequestParam String categoryDetailId) {
+    Map<String, Object> rs = new HashMap<>();
+    try {
+      List<Product> products = productService.findByCategoryDetailId(categoryDetailId);
+      rs.put("status", true);
+      rs.put("message", "Retrieved products successfully");
+      rs.put("data", products);
+    } catch (Exception ex) {
+      rs.put("status", false);
+      rs.put("message", "Failed to retrieve products");
+      rs.put("data", null);
+      ex.printStackTrace();
+    }
+    return ResponseEntity.ok(rs);
+  }
+
   @GetMapping("/edit-product")
   public ResponseEntity<?> getProductByIdManager(@RequestParam("id") Integer id) {
     Map<String, Object> rs = new HashMap<>();
@@ -167,11 +184,13 @@ public class ProductAPI {
     } catch (EntityNotFoundException ex) {
       rs.put("status", false);
       rs.put("message", "Product not found: " + ex.getMessage());
-      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(rs); // Trả về mã trạng thái 404 Not Found
+      return ResponseEntity.status(HttpStatus.NOT_FOUND)
+          .body(rs); // Trả về mã trạng thái 404 Not Found
     } catch (Exception ex) {
       rs.put("status", false);
       rs.put("message", "Update product failed: " + ex.getMessage());
-      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(rs); // Trả về mã trạng thái 500 Internal Server Error
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+          .body(rs); // Trả về mã trạng thái 500 Internal Server Error
     }
   }
 }

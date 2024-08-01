@@ -21,7 +21,7 @@ public class CategoryAPI {
   private CategoryDetailService categoryDetailService;
 
   @GetMapping("/get-all-category")
-  public ResponseEntity<?> getAllProduct() {
+  public ResponseEntity<?> getAllCategory() {
     Map<String, Object> rs = new HashMap<>();
     try {
       rs.put("status", true);
@@ -51,4 +51,22 @@ public class CategoryAPI {
     }
     return ResponseEntity.ok(rs);
   }
+
+  @GetMapping("/get-all-categoryde")
+  public ResponseEntity<?> getAllCategoryde() {
+    Map<String, Object> rs = new HashMap<>();
+    try {
+      rs.put("status", true);
+      rs.put("message", "Call api success");
+      rs.put("data", categoryDetailService.findAll());
+    } catch (Exception ex) {
+      rs.put("status", false);
+      rs.put("message", "Call api failed");
+      rs.put("data", null);
+      ex.printStackTrace();
+    }
+    return ResponseEntity.ok(rs);
+  }
+
+
 }

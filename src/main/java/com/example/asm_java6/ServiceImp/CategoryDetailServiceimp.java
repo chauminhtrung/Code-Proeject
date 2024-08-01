@@ -1,5 +1,6 @@
 package com.example.asm_java6.ServiceImp;
 
+import com.example.asm_java6.Model.Category;
 import com.example.asm_java6.Repo.CategoryDetailDao;
 import com.example.asm_java6.Model.CategoryDetail;
 import com.example.asm_java6.Service.CategoryDetailService;
@@ -12,6 +13,11 @@ public class CategoryDetailServiceimp implements CategoryDetailService {
 
   @Autowired
   private CategoryDetailDao categoryDetailDao;
+
+  @Override
+  public List<CategoryDetail> findAll() {
+    return categoryDetailDao.findAll();
+  }
 
   @Override
   public List<CategoryDetail> getCategoryDetailsByCategoryId(String categoryId) {

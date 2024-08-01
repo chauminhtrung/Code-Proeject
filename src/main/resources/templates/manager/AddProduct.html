@@ -35,23 +35,31 @@
 
         <div class="d-flex">
           <div class="form-outline mb-2 w-50">
-            <label class="form-label ms-2" for="categoryId">ID Danh Mục</label>
-            <input type="text" id="categoryId" class="form-control border" placeholder="CD001"/>
+            <label class="form-label ms-2" for="CategorydeId">ID Danh Mục</label>
+            <select class="form-select border" aria-label="Default select example" id="CategorydeId">
+              <option selected>Open this select menu</option>
+            </select>
           </div>
           <div class="form-outline mb-2 w-50 ms-4">
-            <label class="form-label ms-2" for="categoryName">Tên Danh Mục</label>
-            <input type="text" id="categoryName" class="form-control border" placeholder="Lập trình C#.Net" />
+            <label class="form-label ms-2" for="CategorydeName">Tên Danh Mục</label>
+            <select class="form-select border" aria-label="Default select example" id="CategorydeName">
+              <option selected>Open this select menu</option>
+            </select>
           </div>
         </div>
 
         <div class="d-flex">
           <div class="form-outline mb-2 w-50">
             <label class="form-label ms-2" for="parentCategoryId">ID Danh Mục Cha</label>
-            <input type="text" id="parentCategoryId" class="form-control border" placeholder="1000" />
+            <select class="form-select border" aria-label="Default select example" id="parentCategoryId">
+              <option selected>Open this select menu</option>
+            </select>
           </div>
           <div class="form-outline mb-2 w-50 ms-4">
             <label class="form-label ms-2" for="parentCategoryName">Tên Danh Mục Cha</label>
-            <input type="text" id="parentCategoryName" class="form-control border" placeholder="LẬP TRÌNH" />
+            <select class="form-select border" aria-label="Default select example" id="parentCategoryName">
+              <option selected>Open this select menu</option>
+            </select>
           </div>
         </div>
 
@@ -64,17 +72,80 @@
             <label class="form-label ms-2" for="qtyInput">Số lượng</label>
             <input type="number" id="qtyInput" class="form-control border"/>
           </div>
+          <div class="ms-2 me-1">
+            <label class="form-label ms-2 w-100" for="available">Available</label>
+            <div class="form-check form-switch mode-switch mt-1 ms-2">
+              <input class="form-check-input" type="checkbox" id="available">
+            </div>
+          </div>
         </div>
         <div class="form-outline mb-2">
-          <label class="form-label ms-2" for="descriptionInput">Mô tả</label>
-          <textarea class="form-control border" id="descriptionInput" rows="3"></textarea>
+          <label class="form-label ms-2" for="description">Mô tả</label>
+          <textarea class="form-control border" id="description" rows="3"></textarea>
         </div>
         <button type="button" class="btn btn-primary" id="addProductBtn">Thêm sản phẩm</button>
+        <button type="button" class="btn btn-secondary text-dark ms-2" onclick="resetForm()" style="background-color: #e9f3ff;border-color: #e9f3ff">Làm mới</button>
       </div>
     </div>
   </form>
 </div>
 
+<script>
+  // Hàm để gọi API và điền danh mục
+  async function fillCategories() {
+    try {
+      // Gọi API lấy danh sách danh mục
+      const categoryResponse = await axios.get('/api-category/get-all-category');
+      const categories = categoryResponse.data.data; // Lấy dữ liệu danh mục từ response
+
+      // Điền danh sách categories vào form select
+      const categoryIdSelect = document.getElementById('parentCategoryId');
+      const categoryNameSelect = document.getElementById('parentCategoryName');
+      categoryIdSelect.innerHTML = ''; // Xóa nội dung hiện tại
+      categoryNameSelect.innerHTML = ''; // Xóa nội dung hiện tại
+
+      categories.forEach(category => {
+        const optionId = document.createElement('option');
+        optionId.value = category.id; // Giá trị của option
+        optionId.textContent = category.id; // Nội dung hiển thị cho ID
+        categoryIdSelect.appendChild(optionId); // Thêm option vào select
+
+        const optionName = document.createElement('option');
+        optionName.value = category.id; // Giá trị của option
+        optionName.textContent = category.name; // Nội dung hiển thị cho tên
+        categoryNameSelect.appendChild(optionName); // Thêm option vào select
+      });
+
+      // Gọi API lấy danh sách category details (danh mục cha)
+      const categoryDetailResponse = await axios.get('/api-category/get-all-categoryde');
+      const categoryDetails = categoryDetailResponse.data.data; // Lấy dữ liệu danh mục con từ response
+
+      // Điền danh sách category details vào form select
+      const categorydeIdSelect = document.getElementById('CategorydeId');
+      const categorydeNameSelect = document.getElementById('CategorydeName');
+      categorydeIdSelect.innerHTML = ''; // Xóa nội dung hiện tại
+      categorydeNameSelect.innerHTML = ''; // Xóa nội dung hiện tại
+
+      categoryDetails.forEach(detail => {
+        const optionId = document.createElement('option');
+        optionId.value = detail.id; // Giá trị của option (ID của danh mục con)
+        optionId.textContent = detail.id; // Nội dung hiển thị cho ID
+        categorydeIdSelect.appendChild(optionId); // Thêm option vào select
+
+        const optionName = document.createElement('option');
+        optionName.value = detail.id; // Giá trị của option
+        optionName.textContent = detail.name; // Nội dung hiển thị cho tên
+        categorydeNameSelect.appendChild(optionName); // Thêm option vào select
+      });
+
+    } catch (error) {
+      console.error('Có lỗi xảy ra khi gọi API:', error);
+    }
+  }
+
+  // Gọi hàm khi trang được tải
+  document.addEventListener('DOMContentLoaded', fillCategories);
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>

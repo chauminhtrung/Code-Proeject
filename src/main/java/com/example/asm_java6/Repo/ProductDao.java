@@ -20,4 +20,7 @@ public interface ProductDao extends JpaRepository<Product, Integer> {
   @Query("SELECT p FROM Product p JOIN p.categoryde cd JOIN cd.category c WHERE c.id = :categoryId")
   List<Product> findByCategoryId(@Param("categoryId") String categoryId);
 
+  // Tìm tất cả các sản phẩm theo id của categoryDetail
+  List<Product> findByCategorydeId(String categoryDetailId);
+  
 }
