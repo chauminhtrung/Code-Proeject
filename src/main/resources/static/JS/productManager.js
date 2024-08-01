@@ -13,7 +13,7 @@ const TableDataAccount = async () => {
                     <td class="align-middle">${ProductManager.price.toLocaleString('vi-VN', {style: 'currency', currency: 'VND'})}</td>  
                     <td class="align-middle">${new Date(ProductManager.createDate).toLocaleDateString('vi-VN')}</td>  
                     <td class="align-middle">${categoryName}</td>  
-                    <td class="align-middle d-flex justify-content-center" style="margin-top: 57px">  
+                    <td class="d-flex" style="margin-top: 57px">  
                         <button class="btn btn-info click-edit" data-id="${ProductManager.id}"><i class="bi bi-pencil-square"></i></button>  
                         <button class="btn btn-danger ms-1 click-delete" data-id="${ProductManager.id}"><i class="bi bi-x-lg"></i></button>  
                     </td>  
