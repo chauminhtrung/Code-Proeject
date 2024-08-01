@@ -7,7 +7,6 @@ if (storage) {
 
 const addCart = async (id) => {
 
-
     const response = await axios.get(`/api-product/detail-product?id=${id}`);
     const prolist = response.data.data;
     let item = cart.find(c => c.prolist.id === id);

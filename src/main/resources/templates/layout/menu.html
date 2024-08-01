@@ -1,9 +1,10 @@
 <nav class="navbar navbar-expand-lg" xmlns:th="http://www.thymeleaf.org"
      xmlns:sec="http://www.thymeleaf.org">
   <div class="container-fluid px-0">
-    <a class="navbar-brand position-absolute" href="/home"><img src="/IMG/logo.png" width="120"></a>
+    <a class="navbar-brand" href="/home"><img src="/IMG/logo.png" width="120"></a>
+
     <!-- Mobile view nav wrap -->
-    <div class="ms-auto d-flex align-items-center order-lg-3" >
+    <div class="ms-auto d-flex align-items-center order-lg-3">
       <div class="dropdown">
         <button class="btn btn-light btn-icon rounded-circle d-flex align-items-center"
                 type="button" aria-expanded="false" data-bs-toggle="dropdown"
@@ -80,12 +81,30 @@
                     Profile
                   </a>
                 </li>
-                <li>
-                  <a class="dropdown-item" href="#">
+
+
+                <li sec:authorize="hasRole('ROLE_STAF')">
+                  <a class="dropdown-item" href="/manager/ManagerProducts">
                     <i class="fa-regular fa-star p-2"></i>
-                    Subscription
+                    Manager
                   </a>
                 </li>
+
+                <li sec:authorize="hasRole('ROLE_DIRE')">
+                  <a class="dropdown-item" href="/manager/ManagerProducts">
+                    <i class="fa-regular fa-star p-2"></i>
+                    Manager
+                  </a>
+
+
+                <li sec:authorize="hasRole('ROLE_CUST')">
+                  <a class="dropdown-item" href="/order/list">
+                    <i class="fa-regular fa-star p-2"></i>
+                    Your Order
+                  </a>
+                </li>
+
+
                 <li>
                   <a class="dropdown-item" href="#">
                     <i class="fa-solid fa-gear p-2"></i>
@@ -97,7 +116,7 @@
               <ul class="list-unstyled">
                 <li>
                   <a class="dropdown-item" th:href="@{/security/logoff}"><i
-                      class="fa-solid fa-right-from-bracket m-2"></i>Log Out</a>
+                          class="fa-solid fa-right-from-bracket m-2"></i>Log Out</a>
                 </li>
               </ul>
             </div>
@@ -118,17 +137,17 @@
       </button>
     </div>
     <!-- Collapse -->
-    <div class="collapse navbar-collapse" id="navbar-default" style="margin-left: 120px">
+    <div class="collapse navbar-collapse" id="navbar-default">
       <ul class="navbar-nav mt-3 mt-lg-0">
         <li class="nav-item dropdown">
           <a class="nav-link" href="#" id="navbarBrowse" data-bs-toggle="dropdown"
              aria-haspopup="true" aria-expanded="false" data-bs-display="static">Browse <i
-              class="fa-solid fa-chevron-down fs-6"></i> </a>
+                  class="fa-solid fa-chevron-down fs-6"></i> </a>
 
           <ul class="dropdown-menu " aria-labelledby="navbarBrowse">
             <li class="dropdown-submenu dropend">
               <a class="dropdown-item dropdown-list-group-item " href="#">Web Development <i
-                  class="fa-solid fa-chevron-down fs-5 m-2"></i></a>
+                      class="fa-solid fa-chevron-down fs-5 m-2"></i></a>
               <ul class="dropdown-menu">
                 <li>
                   <a class="dropdown-item" href="./pages/course-category.html">Bootstrap</a>
@@ -161,7 +180,7 @@
             </li>
             <li class="dropdown-submenu dropend">
               <a class="dropdown-item dropdown-list-group-item " href="#">Design <i
-                  class="fa-solid fa-chevron-down fs-6 m-2"></i></a>
+                      class="fa-solid fa-chevron-down fs-6 m-2"></i></a>
               <ul class="dropdown-menu">
                 <li>
                   <a class="dropdown-item" href="./pages/course-category.html">Graphic Design</a>
@@ -215,7 +234,7 @@
         <li class="nav-item dropdown">
           <a class="nav-link " href="#" id="navbarLanding" data-bs-toggle="dropdown"
              aria-haspopup="true" aria-expanded="false">Landings <i
-              class="fa-solid fa-chevron-down fs-6 "></i></a>
+                  class="fa-solid fa-chevron-down fs-6 "></i></a>
           <ul class="dropdown-menu" aria-labelledby="navbarLanding">
             <li>
               <h4 class="dropdown-header">Landings</h4>
@@ -254,13 +273,13 @@
         <li class="nav-item dropdown">
           <a class="nav-link " href="#" id="navbarPages" data-bs-toggle="dropdown"
              aria-haspopup="true" aria-expanded="false">Pages <i
-              class="fa-solid fa-chevron-down fs-6 "></i></a>
+                  class="fa-solid fa-chevron-down fs-6 "></i></a>
           <ul class="dropdown-menu dropdown-menu-arrow" aria-labelledby="navbarPages">
 
 
             <li class="dropdown-submenu dropend">
               <a class="dropdown-item dropdown-list-group-item " href="#">Specialty <i
-                  class="fa-solid fa-chevron-down fs-6 m-2"></i></a>
+                      class="fa-solid fa-chevron-down fs-6 m-2"></i></a>
               <ul class="dropdown-menu">
                 <li>
                   <a class="dropdown-item" href="./pages/coming-soon.html">Coming Soon</a>
@@ -287,7 +306,7 @@
 
             <li class="dropdown-submenu dropend">
               <a class="dropdown-item dropdown-list-group-item " href="#">Help Center <i
-                  class="fa-solid fa-chevron-down fs-5 m-2"></i></a>
+                      class="fa-solid fa-chevron-down fs-5 m-2"></i></a>
               <ul class="dropdown-menu">
                 <li>
                   <a class="dropdown-item" href="./pages/help-center.html">Help Center</a>
@@ -323,7 +342,7 @@
         <li class="nav-item dropdown">
           <a class="nav-link " href="#" id="navbarAccount" data-bs-toggle="dropdown"
              aria-haspopup="true" aria-expanded="false">Accounts <i
-              class="fa-solid fa-chevron-down fs-6"></i></a>
+                  class="fa-solid fa-chevron-down fs-6"></i></a>
           <ul class="dropdown-menu dropdown-menu-arrow" aria-labelledby="navbarAccount">
             <li>
               <h4 class="dropdown-header">Accounts</h4>
@@ -552,3 +571,4 @@
     </div>
   </div>
 </nav>
+

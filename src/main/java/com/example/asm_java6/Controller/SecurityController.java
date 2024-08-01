@@ -2,7 +2,10 @@ package com.example.asm_java6.Controller;
 
 
 import com.example.asm_java6.Model.Account;
+import com.example.asm_java6.Model.Authority;
+import com.example.asm_java6.Model.Role;
 import com.example.asm_java6.Service.AccountService;
+import com.example.asm_java6.Service.AuthorityService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -21,6 +24,8 @@ public class SecurityController {
     @Autowired
     AccountService accountService;
 
+    @Autowired
+    AuthorityService authorityService;
 
     @RequestMapping("/login")
     public String loginform() {
@@ -55,6 +60,10 @@ public class SecurityController {
 
         try {
             var bCrypt = new BCryptPasswordEncoder();
+            Authority authority = new Authority();
+            Role role = new Role();
+            role.setId("CUST");
+            role.setName("Customers");
             Account ACC = new Account();
             ACC.setUsername(account.getUsername());
             ACC.setPassword(bCrypt.encode(account.getPassword()));
@@ -62,7 +71,9 @@ public class SecurityController {
             ACC.setEmail(account.getEmail());
             ACC.setPhoto("user.png");
             accountService.save(ACC);
-
+            authority.setAccount(ACC);
+            authority.setRole(role);
+            authorityService.save(authority);
             model.addAttribute("account", new Account());
             model.addAttribute("success", true);
 
