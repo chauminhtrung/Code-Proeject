@@ -16,7 +16,7 @@
       <div class="col-6">
         <div class="form-outline mb-4 ms-3">
           <label class="form-label ms-2" for="fileInput">Hình ảnh</label>
-          <input class="form-control" id="fileInput" type="file" accept="image/*"/>
+          <input class="form-control border" id="fileInput" type="file" accept="image/*"/>
         </div>
         <div class="form-outline text-center bg-light rounded ms-3" style="max-width: 600px; height: 405px;">
           <img class="rounded" id="imagePreview" width="550" height="405" alt="Image Preview" />
@@ -25,49 +25,49 @@
       <div class="col-6">
         <div class="form-outline mb-2">
           <label class="form-label ms-2" for="name">Tên sản phẩm</label>
-          <input type="text" id="name" class="form-control"/>
+          <input type="text" id="name" class="form-control border"/>
         </div>
 
         <div class="form-outline mb-2">
           <label class="form-label ms-2" for="price">Giá</label>
-          <input type="number" id="price" class="form-control"/>
+          <input type="number" id="price" class="form-control border"/>
         </div>
 
         <div class="d-flex">
           <div class="form-outline mb-2 w-50">
             <label class="form-label ms-2" for="categoryId">ID Danh Mục</label>
-            <input type="text" id="categoryId" class="form-control" placeholder="CD001"/>
+            <input type="text" id="categoryId" class="form-control border" placeholder="CD001"/>
           </div>
           <div class="form-outline mb-2 w-50 ms-4">
             <label class="form-label ms-2" for="categoryName">Tên Danh Mục</label>
-            <input type="text" id="categoryName" class="form-control" placeholder="Lập trình C#.Net" value="Lập trình C#.Net"/>
+            <input type="text" id="categoryName" class="form-control border" placeholder="Lập trình C#.Net" />
           </div>
         </div>
 
         <div class="d-flex">
           <div class="form-outline mb-2 w-50">
             <label class="form-label ms-2" for="parentCategoryId">ID Danh Mục Cha</label>
-            <input type="text" id="parentCategoryId" class="form-control" placeholder="1000"/>
+            <input type="text" id="parentCategoryId" class="form-control border" placeholder="1000" />
           </div>
           <div class="form-outline mb-2 w-50 ms-4">
             <label class="form-label ms-2" for="parentCategoryName">Tên Danh Mục Cha</label>
-            <input type="text" id="parentCategoryName" class="form-control" placeholder="LẬP TRÌNH"/>
+            <input type="text" id="parentCategoryName" class="form-control border" placeholder="LẬP TRÌNH" />
           </div>
         </div>
 
         <div class="d-flex">
           <div class="form-outline mb-2 w-50">
             <label class="form-label ms-2" for="createDate">Ngày tạo</label>
-            <input type="date" id="createDate" class="form-control" />
+            <input type="date" id="createDate" class="form-control border" />
           </div>
           <div class="form-outline mb-2 w-50 ms-4">
             <label class="form-label ms-2" for="qtyInput">Số lượng</label>
-            <input type="number" id="qtyInput" class="form-control"/>
+            <input type="number" id="qtyInput" class="form-control border"/>
           </div>
         </div>
         <div class="form-outline mb-2">
           <label class="form-label ms-2" for="descriptionInput">Mô tả</label>
-          <textarea class="form-control" id="descriptionInput" rows="3"></textarea>
+          <textarea class="form-control border" id="descriptionInput" rows="3"></textarea>
         </div>
         <button type="button" class="btn btn-primary" id="addProductBtn">Thêm sản phẩm</button>
       </div>

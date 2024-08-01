@@ -21,4 +21,10 @@ public interface ProductService {
   @Transactional
   Product addProduct(Product product);
 
+  @Transactional
+  void deleteProduct(Integer id);
+
+  @Transactional
+  Product updateProduct(Integer id, Product product);
+
 }

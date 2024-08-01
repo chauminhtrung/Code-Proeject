@@ -1,6 +1,5 @@
 package com.example.asm_java6.Controller;
 
-import org.apache.catalina.Manager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,6 +41,6 @@ public class ManagerController {
 //    ADD Product
     @RequestMapping("/manager/EditProducts")
     public String AddProduct(Model model) {
-        return "manager/EditProduct";
+        return "/manager/AddProduct";
     }
 }
