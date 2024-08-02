@@ -1,9 +1,13 @@
 package com.example.asm_java6.ServiceImp;
 
 
+import com.example.asm_java6.Model.Authority;
+import com.example.asm_java6.Model.Product;
 import com.example.asm_java6.Repo.AccountDao;
 import com.example.asm_java6.Model.Account;
+import com.example.asm_java6.Repo.AuthDao;
 import com.example.asm_java6.Service.AccountService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,7 +25,8 @@ public class AccountServiceimp implements AccountService, UserDetailsService {
     @Autowired
     AccountDao accountDao;
 
-
+    @Autowired
+    AuthDao authDao;
 
     @Override
     public List<Account> findAll() {
@@ -36,6 +41,20 @@ public class AccountServiceimp implements AccountService, UserDetailsService {
     @Override
     public void save(Account acc) {
         accountDao.save(acc);
+    }
+
+    @Override
+    public void deleteAcc(String username) {
+        Account acc = findAccountsByUsername(username);
+        Authority au =  authDao.findAuthorityByAccount_Username(username);
+        if(au.getRole().getId().equals("CUST")) {
+            accountDao.delete(acc);
+        }
+    }
+
+    @Override
+    public Account updateAcc(String username, Account account) {
+        return accountDao.save(account);
     }
 
     @Override

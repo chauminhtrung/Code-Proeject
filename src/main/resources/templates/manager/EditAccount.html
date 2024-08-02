@@ -6,7 +6,11 @@
 </head>
 <body>
 <div class="wrapper bg-white mt-sm-5" id="ContainerFormAccount" style="padding: 30px 50px;border: 1px solid #ddd;border-radius: 15px;margin: 10px auto;max-width: 1000px;">
-    <h4 class="pb-4 border-bottom" style="letter-spacing: -1px;font-weight: 400;">Account</h4>
+    <div th:if="${success}" class="alert alert-success alert-dismissible fade show">
+        <strong>Account Created Successfully!</strong>
+
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
     <div class="d-flex align-items-start py-3 border-bottom">
         <img style="  width: 170px; height: 120px;border-radius: 6px;object-fit: cover;" src="https://images.pexels.com/photos/1037995/pexels-photo-1037995.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
              class="img" alt="">
@@ -17,32 +21,40 @@
         </div>
     </div>
     <div class="py-2">
+        <form  method="post" th:object="${account}">
         <div class="row py-2">
             <div class="col-md-6">
                 <label >Username:</label>
-                <input type="text" name="username" class="bg-light form-control" placeholder="trung">
+                <input type="text" name="username" th:field="${account.username}" class="bg-light form-control" placeholder="trung">
+                <p th:if="${#fields.hasErrors('username')}" th:errorclass="text-danger" th:errors="${account.username}">  </p>
             </div>
             <div class="col-md-6 pt-md-0 pt-3">
                 <label >Password</label>
-                <input type="password" name="password" class="bg-light form-control" placeholder="***">
+                <input type="password" th:field="${account.password}" name="password" class="bg-light form-control" placeholder="***">
+                <p th:if="${#fields.hasErrors('password')}" th:errorclass="text-danger" th:errors="${account.password}">
+                </p>
             </div>
         </div>
         <div class="row py-2">
             <div class="col-md-6 pt-md-0 pt-3">
                 <label >Fullname:</label>
-                <input type="text" name="fullname" class="bg-light form-control" placeholder="Chau Minh Trung">
+                <input type="text" name="fullname" th:field="${account.fullname}" class="bg-light form-control" placeholder="Chau Minh Trung">
+                <p th:if="${#fields.hasErrors('fullname')}" th:errorclass="text-danger" th:errors="${account.fullname}">  </p>
             </div>
             <div class="col-md-6">
                 <label >Email Address</label>
-                <input type="email" name="email" class="bg-light form-control" placeholder="minhtrung@gmail.com">
+                <input type="email" name="email" class="bg-light form-control" placeholder="minhtrung@gmail.com" th:field="${account.email}">
+                <p th:if="${#fields.hasErrors('email')}" th:errorclass="text-danger" th:errors="${account.email}">
+                </p>
             </div>
         </div>
 
         <div class="py-3 pb-4 border-bottom">
-            <button class="btn btn-primary mr-3">Save</button>
-            <button class="btn btn-tag">Reset</button>
-        </div>
+            <button type="submit" class="btn btn-primary mr-3">Save</button>
+            <a href="/manager/EditAccount" class="btn btn-tag"></a>
 
+        </div>
+        </form>
     </div>
 </div>
 <script src="/JS/account.js"></script>

@@ -16,13 +16,13 @@ import java.util.List;
 @Table(name = "Accounts")
 public class Account  implements Serializable{
     @Id
-    @NotEmpty
+    @NotEmpty( message = "Must Not Be Empty")
     String username;
     @Size(min = 6, message = "Minimum Password length is 6 charater")
     String password;
-    @NotEmpty
+    @NotEmpty( message = " Must Not Be Empty")
     String fullname;
-    @NotEmpty
+    @NotEmpty( message = "Must Not Be Empty")
     @Email
     String email;
     String photo;

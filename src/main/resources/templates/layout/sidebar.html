@@ -1,10 +1,13 @@
-<div class="sidebar_column col-2 d-flex flex-column p-4 bg-dark text-white">
-    <button type="button" class="btn btn-danger fs-5 fw-bold"><i class="bi bi-person-plus-fill"></i>
-        Đăng ký
-    </button>
-    <button type="button" class="sidebar btn btn-primary mt-2 fs-5 fw-bold bg-dark"><i
-            class="bi bi-person-fill"></i> Đăng nhập
-    </button>
+<div class="sidebar_column col-2 d-flex flex-column p-4 bg-dark text-white" xmlns:th="http://www.thymeleaf.org"
+     xmlns:sec="http://www.thymeleaf.org">
+    <div sec:authorize="!isAuthenticated()">
+        <button type="button" class="btn btn-danger fs-5 fw-bold"><i class="bi bi-person-plus-fill"></i>
+            Đăng ký
+        </button>
+        <button type="button" class="sidebar btn btn-primary mt-2 fs-5 fw-bold bg-dark"><i
+                class="bi bi-person-fill"></i> Đăng nhập
+        </button>
+    </div>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
         <li>
