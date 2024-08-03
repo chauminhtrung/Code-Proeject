@@ -9,6 +9,7 @@ import com.example.asm_java6.Service.AuthorityService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -91,6 +92,10 @@ public class SecurityController {
         return "form/login";
     }
 
-
+    @RequestMapping("/oauth2/login/success")
+    public String success(OAuth2AuthenticationToken oAuth2Token) {
+        accountService.loginOAuth2(oAuth2Token);
+        return "/home";
+    }
 
 }

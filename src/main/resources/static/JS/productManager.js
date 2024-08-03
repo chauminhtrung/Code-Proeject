@@ -1,20 +1,37 @@
 /* jshint esversion: 8 */
 // Hàm để gọi API lấy danh sách danh mục
-const fetchcategory = async () => {
+const fetchCategory = async () => {
   try {
     const response = await axios.get('/api-category/get-all-category');
     return response.data.data; // Trả về danh sách danh mục
   } catch (error) {
     console.error("Error fetching categories:", error);
-    return [];
+
+    // Hiển thị thông báo lỗi bằng SweetAlert2
+    Swal.fire({
+      icon: 'error',
+      title: 'Lỗi!',
+      text: 'Có lỗi xảy ra khi lấy danh mục.',
+      footer: 'Vui lòng thử lại sau!'
+    });
+
+    return []; // Trả về mảng rỗng
   }
 };
-const fetchcategoryde = async () => {
+const fetchCategoryde = async () => {
   try {
     const response = await axios.get('/api-category/get-all-categoryde');
     return response.data.data; // Trả về danh sách danh mục
   } catch (error) {
     console.error("Error fetching categories:", error);
+
+    // Hiển thị thông báo lỗi bằng SweetAlert2
+    Swal.fire({
+      icon: 'error',
+      title: 'Lỗi!',
+      text: 'Có lỗi xảy ra khi lấy danh mục.',
+      footer: 'Vui lòng thử lại sau!'
+    });
     return [];
   }
 };
@@ -33,17 +50,17 @@ const TableDataAccount = async () => {
                     <td class="align-middle ">${ProductManager.name}</td>  
                     <td class="align-middle"><img class="rounded" src="/IMG/${ProductManager.image}" height="90" width="150"></td>  
                     <td class="align-middle">${ProductManager.price.toLocaleString(
-          'vi-VN', {style: 'currency', currency: 'VND'})}</td>  
+          'vi-VN', { style: 'currency', currency: 'VND' })}</td>  
                     <td class="align-middle">${new Date(
-          ProductManager.createDate).toLocaleDateString('vi-VN')}</td> 
+          ProductManager.createDate).toLocaleDateString('vi-VN')}</td>   
                     <td class="align-middle">${ProductManager.available}</td>                
-                    <td class="align-middle">${ProductManager.categoryde.id}</td>
-                    <td class="align-middle">${ProductManager.categoryde.name}</td>
-                    <td class="align-middle">${ProductManager.categoryde.category.id}</td>
-                    <td class="align-middle">${ProductManager.categoryde.category.name}</td>
+                    <td class="align-middle">${ProductManager.categoryde.id}</td>  
+                    <td class="align-middle">${ProductManager.categoryde.name}</td>  
+                    <td class="align-middle">${ProductManager.categoryde.category.id}</td>  
+                    <td class="align-middle">${ProductManager.categoryde.category.name}</td>  
                     <td class="align-middle">  
                         <button class="btn btn-info click-edit" data-id="${ProductManager.id}"><i class="bi bi-pencil-square"></i></button>  
-                        <button class="btn btn-danger mt-2 click-delete" data-id="${ProductManager.id}"><i class="bi bi-x-lg"></i></button>
+                        <button class="btn btn-danger mt-2 click-delete" data-id="${ProductManager.id}"><i class="bi bi-x-lg"></i></button>  
                     </td>  
                 </tr>  
             `;
@@ -67,16 +84,32 @@ const TableDataAccount = async () => {
     document.querySelectorAll('.click-delete').forEach(button => {
       button.addEventListener('click', async function () {
         const id = this.getAttribute('data-id');
-        const confirmDelete = confirm(
-            "Bạn có chắc chắn muốn xóa sản phẩm này?");
-        if (confirmDelete) {
+
+        const { isConfirmed } = await Swal.fire({
+          title: 'Xác nhận xóa',
+          text: "Bạn có chắc chắn muốn xóa sản phẩm này?",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Xóa !',
+          cancelButtonText: 'Hủy'
+        });
+
+        if (isConfirmed) {
           try {
             const response = await axios.delete(`/api-product/delete/${id}`);
-            alert(response.data.message); // Hiển thị thông điệp thành công
+            await Swal.fire({
+              icon: 'success',
+              title: 'Thành công',
+              text: response.data.message,
+            });
             TableDataAccount(); // Tải lại bảng sản phẩm
           } catch (error) {
             console.error(error);
-            alert("Đã xảy ra lỗi khi xóa sản phẩm.");
+            await Swal.fire({
+              icon: 'error',
+              title: 'Lỗi',
+              text: "Đã xảy ra lỗi khi xóa sản phẩm.",
+            });
           }
         }
       });
@@ -102,8 +135,8 @@ const editProduct = async (productId) => {
     const formattedCreateDate = createDate.toISOString().split('T')[0];
 
     // Gọi hàm fetchCategories để lấy danh mục
-    const category = await fetchcategory();
-    const categoryde = await fetchcategoryde();
+    const category = await fetchCategory();
+    const categoryde = await fetchCategoryde();
 
     const currentCategorydeId = product.categoryde.id;
     const currentCategorydeName = product.categoryde.name;
@@ -219,7 +252,7 @@ const editProduct = async (productId) => {
             </div> 
             <button type="submit" class="btn btn-success" style="background-color: #3cba54;">Cập nhật</button>  
             <button type="button" class="btn btn-danger ms-2" onclick="deleteProduct(${product.id})" style="background-color: #f8285a">Xóa</button>   
-            <button type="button" class="btn btn-secondary text-dark ms-2" onclick="resetForm()" style="background-color: #e9f3ff;border-color: #e9f3ff">Làm mới</button>  
+            <button type="button" class="btn btn-secondary text-dark ms-2" onclick="resetFormWithConfirmation()" style="background-color: #e9f3ff;border-color: #e9f3ff">Làm mới</button>  
           </div>  
         </div>  
       </form>  
@@ -258,7 +291,7 @@ const updateProduct = async (productId) => {
   const name = document.getElementById('name').value;
   const price = parseFloat(document.getElementById('price').value);
 
-// Lấy ID và tên danh mục con (categoryde)
+  // Lấy ID và tên danh mục con (categoryde)
   const categorydeId = document.getElementById('CategorydeId').value; // Đảm bảo ID đúng
   const categorydeName = document.getElementById('CategorydeName').value; // Đảm bảo ID đúng
 
@@ -272,6 +305,7 @@ const updateProduct = async (productId) => {
   const available = document.getElementById('available').checked;
   const image = document.getElementById('fileInput').files[0]
       ? document.getElementById('fileInput').files[0].name : ""; // Thêm logic để lấy giá trị hình ảnh
+
   // Tạo đối tượng sản phẩm mới
   const updatedProduct = {
     name: name,
@@ -292,44 +326,113 @@ const updateProduct = async (productId) => {
   };
 
   try {
-    const response = await axios.put(`/api-product/update-product/${productId}`,
-        updatedProduct);
+    const response = await axios.put(`/api-product/update-product/${productId}`, updatedProduct);
 
     if (response.data.status) {
-      alert('Cập nhật sản phẩm thành công!');
+      // Sử dụng SweetAlert2 để thông báo thành công
+      await Swal.fire({
+        title: 'Thành công!',
+        text: 'Cập nhật sản phẩm thành công!',
+        icon: 'success',
+        confirmButtonText: 'Đồng ý'
+      });
       // Có thể thực hiện các bước khác như làm mới dữ liệu hoặc chuyển hướng về trang danh sách sản phẩm
+      resetForm()
       TableDataAccount();
     } else {
-      alert('Cập nhật sản phẩm thất bại: ' + response.data.message);
+      // Sử dụng SweetAlert2 để thông báo lỗi
+      await Swal.fire({
+        title: 'Thất bại!',
+        text: 'Cập nhật sản phẩm thất bại: ' + response.data.message,
+        icon: 'error',
+        confirmButtonText: 'Đồng ý'
+      });
     }
   } catch (error) {
+    // Sử dụng SweetAlert2 để thông báo lỗi
     if (error.response) {
-      alert('Có lỗi xảy ra: ' + error.response.data.message);
+      await Swal.fire({
+        title: 'Có lỗi xảy ra!',
+        text: 'Có lỗi xảy ra: ' + error.response.data.message,
+        icon: 'error',
+        confirmButtonText: 'Đồng ý'
+      });
     } else {
-      alert('Lỗi: ' + error.message);
+      await Swal.fire({
+        title: 'Lỗi!',
+        text: 'Lỗi: ' + error.message,
+        icon: 'error',
+        confirmButtonText: 'Đồng ý'
+      });
     }
   }
 };
 
 //==================================================HÀM DELETE PRODUCT
 const deleteProduct = async (productId) => {
-  const confirmDelete = confirm(
-      "Bạn có chắc chắn muốn xóa sản phẩm này không?");
+  // Hiển thị xác nhận xóa dữ liệu bằng SweetAlert2
+  const { value: confirmDelete } = await Swal.fire({
+    title: 'Xác nhận xóa',
+    text: "Bạn có chắc chắn muốn xóa sản phẩm này không?",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Xóa !',
+    cancelButtonText: 'Hủy'
+  });
+
+  // Nếu người dùng xác nhận xóa
   if (confirmDelete) {
     try {
       const response = await axios.delete(`/api-product/delete/${productId}`);
-      alert(response.data.message); // Hiển thị thông báo thành công
-      TableDataAccount(); // Tải lại bảng sản phẩm
+
+      // Hiển thị thông báo thành công
+      await Swal.fire({
+        title: 'Thành công!',
+        text: response.data.message,
+        icon: 'success',
+        confirmButtonText: 'Đồng ý'
+      });
+
       resetForm();
-      // Refresh the product list or perform any additional action as needed
+      TableDataAccount(); // Tải lại bảng sản phẩm
     } catch (error) {
       console.error("Error deleting product:", error);
-      alert("Error deleting product: " + error.response.data.message);
+
+      // Hiển thị thông báo lỗi
+      await Swal.fire({
+        title: 'Có lỗi xảy ra!',
+        text: "Lỗi khi xóa sản phẩm: " + (error.response ? error.response.data.message : error.message),
+        icon: 'error',
+        confirmButtonText: 'Đồng ý'
+      });
     }
   }
 };
 
 //===========================================RESET PRODUCT
+async function resetFormWithConfirmation() {
+  // Hiển thị xác nhận trước khi reset form
+  const { value: confirmReset } = await Swal.fire({
+    title: 'Xác nhận reset',
+    text: "Bạn có chắc chắn muốn reset form này không?",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Reset',
+    cancelButtonText: 'Hủy'
+  });
+
+  // Nếu người dùng xác nhận reset
+  if (confirmReset) {
+    resetForm(); // Gọi hàm resetForm để reset form
+    await Swal.fire({
+      title: 'Đã reset!',
+      text: 'Form đã được reset thành công.',
+      icon: 'success',
+      confirmButtonText: 'Đồng ý'
+    });
+  }
+}
+
 function resetForm() {
   document.getElementById('name').value = ''; // Tên khóa học
   document.getElementById('price').value = ''; // Giá khóa học
@@ -354,6 +457,8 @@ function resetForm() {
   imagePreview.style.display = 'none'; // Ẩn ảnh xem trước
 }
 
+
+
 //===========================================ADD PRODUCT
 document.getElementById('addProductBtn').addEventListener('click',
     async function () {
@@ -369,10 +474,8 @@ document.getElementById('addProductBtn').addEventListener('click',
       // Lấy thông tin danh mục
       const categoryId = document.getElementById('CategorydeId').value;
       const categoryName = document.getElementById('CategorydeName').value;
-      const parentCategoryId = document.getElementById(
-          'parentCategoryId').value;
-      const parentCategoryName = document.getElementById(
-          'parentCategoryName').value;
+      const parentCategoryId = document.getElementById('parentCategoryId').value;
+      const parentCategoryName = document.getElementById('parentCategoryName').value;
 
       // Đối tượng CategoryDetail
       const categoryDetail = {
@@ -409,13 +512,28 @@ document.getElementById('addProductBtn').addEventListener('click',
 
         if (response.ok) {
           const result = await response.json();
-          alert('Sản phẩm đã được thêm thành công: ' + result.name);
+          await Swal.fire({
+            icon: 'success',
+            title: 'Thành công!',
+            text: 'Sản phẩm đã được thêm thành công: ' + result.name,
+            confirmButtonText: 'Đồng ý'
+          });
         } else {
           const error = await response.json();
-          alert('Có lỗi xảy ra: ' + error.message);
+          await Swal.fire({
+            icon: 'error',
+            title: 'Có lỗi xảy ra',
+            text: 'Lỗi: ' + error.message,
+            confirmButtonText: 'Đồng ý'
+          });
         }
       } catch (error) {
-        alert('Có lỗi xảy ra khi kết nối với máy chủ: ' + error.message);
+        await Swal.fire({
+          icon: 'error',
+          title: 'Có lỗi xảy ra',
+          text: 'Lỗi kết nối với máy chủ: ' + error.message,
+          confirmButtonText: 'Đồng ý'
+        });
       }
     });
 

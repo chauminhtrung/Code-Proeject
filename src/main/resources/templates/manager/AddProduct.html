@@ -84,7 +84,7 @@
           <textarea class="form-control border" id="description" rows="3"></textarea>
         </div>
         <button type="button" class="btn btn-primary" id="addProductBtn">Thêm sản phẩm</button>
-        <button type="button" class="btn btn-secondary text-dark ms-2" onclick="resetForm()" style="background-color: #e9f3ff;border-color: #e9f3ff">Làm mới</button>
+        <button type="button" class="btn btn-secondary text-dark ms-2" onclick="resetFormWithConfirmation()" style="background-color: #e9f3ff;border-color: #e9f3ff">Làm mới</button>
       </div>
     </div>
   </form>
@@ -94,7 +94,6 @@
   // Hàm để gọi API và điền danh mục
   async function fillCategories() {
     try {
-      // Gọi API lấy danh sách danh mục
       const categoryResponse = await axios.get('/api-category/get-all-category');
       const categories = categoryResponse.data.data; // Lấy dữ liệu danh mục từ response
 
@@ -139,10 +138,14 @@
       });
 
     } catch (error) {
-      console.error('Có lỗi xảy ra khi gọi API:', error);
+      await Swal.fire({
+        icon: 'error',
+        title: 'Có lỗi xảy ra',
+        text: 'Chi tiết lỗi: ' + error.message,
+        confirmButtonText: 'Đồng ý'
+      });
     }
   }
-
   // Gọi hàm khi trang được tải
   document.addEventListener('DOMContentLoaded', fillCategories);
 </script>

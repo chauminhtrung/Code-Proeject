@@ -3,7 +3,6 @@ package com.example.asm_java6.Controller;
 import com.example.asm_java6.Model.Account;
 import com.example.asm_java6.Model.Authority;
 import com.example.asm_java6.Model.Role;
-import com.example.asm_java6.Repo.RoleDao;
 import com.example.asm_java6.Service.AccountService;
 import com.example.asm_java6.Service.AuthorityService;
 import jakarta.validation.Valid;
@@ -25,7 +24,6 @@ public class ManagerController {
     AccountService accountService;
     @Autowired
     AuthorityService authorityService;
-
 
     @RequestMapping("/manager")
     public String manager(Model model) {
@@ -51,7 +49,6 @@ public class ManagerController {
         return "manager/ManagerOrders";
     }
 
-    // Auth
     @RequestMapping("/manager/Authorities")
     public String managerAuthorities(Model model) {
         model.addAttribute("option","Edit Authority");
@@ -81,8 +78,7 @@ public class ManagerController {
     }
 
     @RequestMapping("/manager/EditAccount/username")
-    public String detail(@RequestParam("username") String username,Model model) {
-        model.addAttribute("option","Edit Product");
+    public String detail(@RequestParam("username") String username) {
         return "/manager/EditAccount";
     }
 
@@ -124,10 +120,5 @@ public class ManagerController {
         return "/manager/EditAccount";
     }
 
-    //thong ke
-    @RequestMapping("/manager/Statistical")
-    public String Statistical(Model model) {
-        model.addAttribute("option","Statistical");
-        return "/manager/Statistical";
-    }
+
 }
