@@ -264,3 +264,5 @@ const fillProductByCategory = async (categoryId) => {
 document.addEventListener('DOMContentLoaded', () => {
   getCategories(); // Gọi hàm để lấy danh mục và sản phẩm
 });
+
+

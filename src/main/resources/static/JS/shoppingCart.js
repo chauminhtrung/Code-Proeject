@@ -4,6 +4,7 @@ if (storage) {
     cart = JSON.parse(storage)
 }
 
+const cartbaged = document.getElementById('cart-baged');
 
 const addCart = async (id) => {
 
@@ -20,12 +21,14 @@ const addCart = async (id) => {
     } else {
         try {
             cart.push({prolist, qty: 1})
+
             Swal.fire({
                 icon: 'success',
                 title: 'Added course successfully',
                 text: 'This course has been added successfully.',
                 timer: 1500
             })
+            cartlength();
         } catch (error) {
             console.error(error);
             container.innerHTML = '<p>Có lỗi xảy ra khi gọi API.</p>';
@@ -36,13 +39,41 @@ const addCart = async (id) => {
     localStorage.setItem('cart', JSON.stringify(cart))
     viewCart(cart);
 }
+if (cart.length > 0) {
+    cartbaged.textContent = cart.length;
+    cartbaged.style.display = 'inline';
+} else {
+    cartbaged.style.display = 'none';
+}
 
+//số lượng item trong cart
+function cartlength(){
+    if (cart.length > 0) {
+        cartbaged.textContent = cart.length;
+        cartbaged.style.display = 'inline';
+    } else {
+        cartbaged.style.display = 'none';
+    }
+}
+
+function cartItem(){
+
+    if (cart.length > 0) {
+    window.location.href = "/cart/view";
+    } else {
+        Swal.fire({
+            title: "Cart is empty!",
+            text: "Let's add products!",
+            icon: "info"
+        });
+    }
+}
 
 const viewCart = (shoppingCart) => {
 
     let cartBody = document.getElementById('cartbody')
     cartBody.innerHTML = '';
-
+    cartlength();
     shoppingCart.map(item => {
         cartBody.innerHTML += `
             <tbody>
@@ -81,7 +112,7 @@ const removeItem = id => {
     }
     cart = cart.filter(item => item.prolist.id !== id)
     localStorage.setItem('cart', JSON.stringify(cart))
-    viewCart(cart)
+    viewCart(cart);
 }
 
 /* Hàm này để đây đừng xóa nhé tôi ơi */

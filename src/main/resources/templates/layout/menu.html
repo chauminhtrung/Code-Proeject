@@ -41,9 +41,13 @@
 
         <div sec:authorize="isAuthenticated()">
           <li class="dropdown d-inline-block stopevent position-static">
-            <a class="btn btn-light btn-icon rounded-circle indicator indicator-primary"
-               href="/cart/view">
-              <i class="fa-solid fa-cart-shopping"></i>
+            <a class="btn btn-light btn-icon rounded-circle"
+                onclick="cartItem()">
+              <i class="fa-solid fa-cart-shopping">
+                <span id="cart-baged" class="position-absolute top-0 start-80 translate-middle badge rounded-pill bg-danger" style="font-size: 8px; display: none">
+                </span>
+              </i>
+
             </a>
           </li>
 
@@ -51,14 +55,14 @@
             <a class="rounded-circle" href="#" data-bs-toggle="dropdown" data-bs-display="static"
                aria-expanded="false">
               <div class="avatar avatar-md avatar-indicators avatar-online">
-                <img alt="avatar" src="/IMG/user.webp" class="rounded-circle">
+                <img alt="avatar" id="imgUser2" src="" class="rounded-circle">
               </div>
             </a>
             <div class="dropdown-menu dropdown-menu-end position-absolute mx-3 my-5">
               <div class="dropdown-item">
                 <div class="d-flex">
                   <div class="avatar avatar-md avatar-indicators avatar-online">
-                    <img alt="avatar" src="/IMG/user.webp" class="rounded-circle">
+                    <img alt="avatar" id="imgUser3" src="" class="rounded-circle">
                   </div>
                   <div class="ms-3 lh-1">
                     <h5 class="mb-1" sec:authentication="name"></h5>
@@ -76,10 +80,11 @@
 
                 </li>
                 <li>
-                  <a class="dropdown-item" href="#">
+                  <a class="dropdown-item profile" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     <i class="fa-regular fa-user p-2"></i>
                     Profile
                   </a>
+
                 </li>
 
 
@@ -125,6 +130,47 @@
 
 
       </ul>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title" id="exampleModalLabel">My Profile</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3 row">
+             <div class="col-4">
+               <img style="width: 120px; height: 120px;border-radius: 50%;object-fit: cover;" src=""
+                    class="img" id="imgUser" alt="" >
+             </div>
+              <div class="col-8" id="img-section" style="">
+                <b>Username: </b><b id="usernameid" sec:authentication="name"></b>
+                <p>Accepted file type .png. Less than 1MB</p>
+                <input class="form-control border" id="fileImage" type="file" accept="image/*" onchange="updateImage(this)"/>
+                <input class="form-control" style="display: none" type="text" id="photoFileName" readonly>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="Fullname form-label">Fullname</label>
+              <input type="text" class="form-control" id="Fullname" placeholder="Fullname">
+            </div>
+            <div class="mb-3">
+              <label class="Email form-label">Email address</label>
+              <input type="email" class="form-control" id="Email" placeholder="name@example.com">
+            </div>
+            <div class="mb-3">
+              <label  class="form-label">Password</label>
+              <input type="password" id="Password" class="form-control" placeholder="Password">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" onclick="updateUserInfo()">Save changes</button>
+          </div>
+        </div>
+      </div>
     </div>
     <div>
       <!-- Button -->
