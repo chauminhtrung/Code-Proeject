@@ -3,8 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
 </head>
-<body>
-<h2>Authica</h2>
+
+<body ng-app="myApp" ng-controller="myCtrl">
+<div class="container">
+    <div class="d-flex">
+        <form class="mt-3 mt-lg-0 ms-lg-3 d-flex align-items-center">
+        <span class="position-absolute ps-3 search-icon">
+         <i class="fa-solid fa-magnifying-glass"></i>
+        </span>
+            <label for="searchInput" class="visually-hidden"></label>
+            <input type="search" id="searchInput" class="form-control ps-6" placeholder="Tìm kiếm Account" ng-change="SearchAccount()" ng-model="myValue">
+        </form>
+
+        <select class="form-select w-50 ms-2 me-2" style="height: 41px" id="filterSelect" aria-label="Default select example" ng-change="handleFilterChange()" ng-model="myValue">
+            <option value="Staffs">Staffs</option>
+            <option value="Customers">Customers</option>
+            <option value="Directors">Directors</option>
+            <option value="All">All</option>
+        </select>
+
+    </div>
+    <hr>
+    <div class="bg-white p-4 rounded m-4" style="overflow-y: scroll;height: 500px; width: 1200px;position: relative;">
+    <table class="table" ng-if="db" >
+        <thead>
+        <tr>
+            <th></th>
+            <th ng-repeat="role in db.roles" >
+
+                {{role.name}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="acc in db.accounts">
+            <th>{{acc.username}}</th>
+            <th ng-repeat="role in db.roles">
+                <input type="checkbox" ng-checked="index_of(acc.username,role.id) >=0"
+                       ng-click="update(acc.username,role.id)"/>
+            </th>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+</div>
+<script src="/JS/AuthoritesManager.js">
+</script>
 </body>
 </html>

@@ -4,6 +4,6 @@ package com.example.asm_java6.Repo;
 import com.example.asm_java6.Model.Authority;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface AuthDao extends JpaRepository<Authority, String> {
+public interface AuthDao extends JpaRepository<Authority, Integer> {
     Authority findAuthorityByAccount_Username(String username);
 }

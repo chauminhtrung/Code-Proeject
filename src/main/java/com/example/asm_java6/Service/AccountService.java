@@ -17,4 +17,8 @@ public interface AccountService {
     void deleteAcc(String username);
 
     Account updateAcc(String username, Account account);
+
+    List<Account> findListAccountsByUsername(String username);
+
+    List<Account> findAllByRole(String role);
 }

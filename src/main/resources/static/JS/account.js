@@ -173,7 +173,8 @@ const EditAccountWUser = async (username) => {
             <div class="pl-sm-4 pl-2" id="img-section" style="margin-left: 20px">
                 <b>Profile Photo</b>
                 <p>Accepted file type .png. Less than 1MB</p>
-                <button class="btn button border"><b>Upload</b></button>
+                <input class="form-control border" type="file"/>
+              
             </div>
         </div>
         <div class="py-2">
@@ -229,7 +230,11 @@ const deleteAcc = async (username) => {
     if (confirmDelete) {
         try {
             const response = await axios.delete(`/api-accounts/delete?username=${username}`);
-            alert(response.data.message); // Hiển thị thông báo thành công
+            Swal.fire({
+                title: "Good job!",
+                text: response.data.message,
+                icon: "success"
+            });// Hiển thị thông báo thành công
             TableDataAccount();
             // Refresh the product list or perform any additional action as needed
         } catch (error) {
@@ -257,7 +262,11 @@ const updateAcc = async (username) => {
         acc.email = email;
         const updateRe = await axios.put(`/api-accounts/update-acc?username=${username}`, acc);
         if (updateRe.data.status) {
-            alert('Cập nhật Account thành công!');
+            Swal.fire({
+                title: "Good job!",
+                text: "Cập nhật Account thành công!",
+                icon: "success"
+            });
             // Có thể thực hiện các bước khác như làm mới dữ liệu hoặc chuyển hướng về trang danh sách sản phẩm
             TableDataAccount();
         } else {
@@ -270,8 +279,65 @@ const updateAcc = async (username) => {
         alert("Error deleting product: " + error.response.data.message);
     }
 
-
 }
 
+//------------------------- Search Account----------------------------//
 
+const SearchAccount = async ()  => {
+    let input = document.getElementById("searchInput").value;
+    const trTableDataAcc = document.getElementById('TableAccount');
+    trTableDataAcc.innerHTML = '';
+    try {
+        const response = await axios.get(`/api-accounts/get-ListaccountByUsername?username=${input}`);
+        const items = response.data.data;
 
+        let paper = {
+            page: 0,
+            size: 10,
+            get items() {
+                var start = this.page * this.size;
+                lengtItem = items.length;
+                const pageCount = document.getElementById("CountPage");
+                pageCount.innerHTML = this.page + 1 + " " + "of" + " " + this.count;
+                return items.slice(start, start + this.size);
+
+            },
+            get count() {
+                return Math.ceil(1.0 * items.length / this.size);
+            },
+        }
+
+        paper.items.forEach(AccountDetail => {
+            let listAccount = `  
+               <tr class="text-center">
+                <td>${AccountDetail.username}</td>                
+                <td>*****</td>
+                <td>${AccountDetail.fullname}</td>
+                <td>${AccountDetail.email}</td>
+                <td>${AccountDetail.photo}</td>
+                 <td>
+                    <button class="btn btn-danger m-1 click-delete" data-id="${AccountDetail.username}">Remove</button>
+                    <button class="btn btn-info click-edit" data-id="${AccountDetail.username}">Edit</button>
+
+                 </td>
+            </tr>
+      `
+            trTableDataAcc.insertAdjacentHTML('beforeend', listAccount);
+        });
+    } catch (error) {
+        console.error(error);
+    }
+    $('.click-edit').click(function () {
+        const username = $(this).data('id');
+        const tabTrigger = new bootstrap.Tab(
+            document.getElementById('ex1-tab-2'));
+        tabTrigger.show();
+        EditAccountWUser(username);
+    });
+
+    $('.click-delete').click(function () {
+        const username = $(this).data('id');
+        deleteAcc(username);
+    });
+
+};

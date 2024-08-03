@@ -58,6 +58,16 @@ public class AccountServiceimp implements AccountService, UserDetailsService {
     }
 
     @Override
+    public List<Account> findListAccountsByUsername(String username) {
+        return accountDao.findListAccountsByUsername(username);
+    }
+
+    @Override
+    public List<Account> findAllByRole(String role) {
+        return accountDao.findListAccountsByRole(role);
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Account acc = accountDao.findAccountsByUsername(username);
 

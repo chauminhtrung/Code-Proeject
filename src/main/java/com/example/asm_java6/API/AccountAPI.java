@@ -109,5 +109,19 @@ public class AccountAPI {
         }
     }
 
+    @GetMapping("/get-ListaccountByUsername")
+    public ResponseEntity<?> getListaccountByUsername(@RequestParam("username") String username) {
+        Map<String, Object> rs = new HashMap<>();
+        try {
+            rs.put("status", true);
+            rs.put("message", "Call api success");
+            rs.put("data", accountService.findListAccountsByUsername(username));
+        } catch (Exception ex) {
+            rs.put("status", false);
+            rs.put("message", "Call api failed");
+            rs.put("data", null);
+        }
+        return ResponseEntity.ok(rs);
+    }
 
 }
