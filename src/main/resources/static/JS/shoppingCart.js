@@ -224,8 +224,6 @@ function checkout() {
                 });
             }
 
-            // cart.clear();
-            // location.href = "/order/detail/" + resp.data.id;
         }).catch(err => {
         console.log(err);
     })

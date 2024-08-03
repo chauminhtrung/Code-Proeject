@@ -21,25 +21,25 @@ viewOrderLinks.forEach(link => {
                     .toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</b></p>
           <p>Create Date: <i class="text-dark-warning">${order.createDate}</i></p>
           <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Id Product</th>
-      <th scope="col">Image</th>
-      <th scope="col">Name</th>
-      <th scope="col">Price</th>
-    </tr>
-  </thead>
-  <tbody>
-  ${orderDetails.map(item => `
-         <tr>
-      <th scope="row">${item.product.id}</th>
-      <td><img src="/IMG/${item.product.image}" width="50px" alt=""></td>
-      <td>${item.product.name}</td>
-      <td>${item.price.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</td>
-    </tr>
-  `).join('')}
-  </tbody>
-</table>
+            <thead>
+                <tr>
+                  <th scope="col">Id Product</th>
+                  <th scope="col">Image</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Price</th>
+                </tr>
+            </thead>
+             <tbody>
+                  ${orderDetails.map(item => `
+                         <tr>
+                      <th scope="row">${item.product.id}</th>
+                      <td><img src="/IMG/${item.product.image}" width="50px" alt=""></td>
+                      <td>${item.product.name}</td>
+                      <td>${item.price.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</td>
+                    </tr>
+                  `).join('')}
+             </tbody>
+            </table>
         </div>
 
       `,

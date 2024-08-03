@@ -141,7 +141,7 @@ const editProduct = async (productId) => {
 
     const html = `  
       <div class="d-flex position-absolute" style="margin-left: 1100px;margin-top: -39px">  
-        <span>ID: ${product.id}</span>  
+        <span>ID: ${product.id}</span>   
       </div>  
       <form id="editProductDetails">  
         <div class="row">  
