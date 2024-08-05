@@ -5,6 +5,90 @@
     <title>Title</title>
 </head>
 <body>
-    <h2>thong ke</h2>
+<!--=============== MAIN ===============-->
+<main class="main container" id="main">
+    <div class="p-4">
+        <div class="row row-cols-3 g-3">
+            <div class="col">
+                <div class="card h-100 shadow-2-strong">
+                    <div class="card-body">
+                        <div class="float-end">
+                            <i class="fas fa-user-group"></i>
+                        </div>
+                        <h5 class="text-muted fw-normal mt-0" title="Number of Customers">Users</h5>
+                        <h3 class="mt-2 mb-2" id="numberOfUsers">235</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100 shadow-2-strong">
+                    <div class="card-body">
+                        <div class="float-end">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h5 class="text-muted fw-normal mt-0" title="Number of Customers">Courses</h5>
+                        <h3 class="mt-2 mb-2" id="numberOfCourses">14</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100 shadow-2-strong">
+                    <div class="card-body">
+                        <div class="float-end">
+                            <i class="fas fa-rectangle-list"></i>
+                        </div>
+                        <h5 class="text-muted fw-normal mt-0" title="Number of Customers">Thematics</h5>
+                        <h3 class="mt-2 mb-2" id="numberOfTopics">6</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-4">
+                <div class="card h-100 shadow-2-strong ">
+                    <div class="card-body ">
+                        <canvas  id="myChart" style="max-width: 270px; max-height: 170px"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="card h-100 shadow-2-strong ">
+                    <div class="card-body " style="overflow-y: scroll;height: 250px;position: relative;">
+                        <table class="table">
+                            <thead>
+                            <tr class="text-center">
+                                <th scope="col">#</th>
+                                <th scope="col">Course Name</th>
+                                <th scope="col">Thematic</th>
+                                <th scope="col">Total</th>
+                            </tr>
+                            </thead>
+                            <tbody id="TableTotalCourse">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col">
+                <div>
+                    <canvas id="myChartAll" style="max-width: 1050px; max-height: 240px"></canvas>
+                </div>
+            </div>
+
+        </div>
+
+
+
+    </div>
+</main>
+
+<!-- Axios -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<!-- Chart JS -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="/JS/Statistical.js"></script>
 </body>
 </html>

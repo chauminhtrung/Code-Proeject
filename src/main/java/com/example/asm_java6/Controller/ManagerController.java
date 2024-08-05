@@ -78,7 +78,8 @@ public class ManagerController {
     }
 
     @RequestMapping("/manager/EditAccount/username")
-    public String detail(@RequestParam("username") String username) {
+    public String detail(@RequestParam("username") String username,Model model) {
+        model.addAttribute("option","Edit Product");
         return "/manager/EditAccount";
     }
 
@@ -120,5 +121,10 @@ public class ManagerController {
         return "/manager/EditAccount";
     }
 
-
+    //thong ke
+    @RequestMapping("/manager/Statistical")
+    public String Statistical(Model model) {
+        model.addAttribute("option","Statistical");
+        return "/manager/Statistical";
+    }
 }

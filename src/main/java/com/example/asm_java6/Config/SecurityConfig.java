@@ -16,8 +16,9 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
-  @Bean
-  public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
+  @Bean(name = "securityFilterChain1")
+  public SecurityFilterChain securityFilterChain1(HttpSecurity http) throws Exception {
     http.authorizeHttpRequests(auth -> auth
             .requestMatchers("/order/**").authenticated()  // Bảo vệ đường dẫn /order/**
             .requestMatchers("/manager/**").hasAnyRole("STAF", "DIRE")  // Chỉ cho phép người dùng có vai trò STAFF hoặc DIRECTOR truy cập
@@ -25,14 +26,11 @@ public class SecurityConfig {
             .anyRequest().permitAll()  // Mọi yêu cầu khác đều được phép
         )
 
-
         .oauth2Login(oauth2 -> oauth2
             .loginPage("/login")  // Đặt trang đăng nhập
             .defaultSuccessUrl("/oauth2/login/success", true)  // Đặt URL chuyển hướng sau khi đăng nhập thành công
             .failureUrl("/security/login/error")  // Đặt URL chuyển hướng sau khi thất bại
         )
-
-
 
 
         .formLogin(form -> form
