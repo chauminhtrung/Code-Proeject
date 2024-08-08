@@ -14,8 +14,9 @@ public interface OrderService {
 
     Order findById(Long username);
 
-
     List<Order> findOrderByAccount_Username(String username);
 
     List<OrderDetail> getOrderDetailsByOrderId(long id);
+
+   void updateOrderStatus(Long id, String newStatus);
 }

@@ -59,5 +59,10 @@ public class OrderServiceImp implements OrderService {
         return orderDao.findById(id).get().getOrderDetails();
     }
 
+    @Override
+    public void updateOrderStatus(Long id, String newStatus) {
+        orderDao.updateStatusById(id, newStatus);
+    }
+
 
 }

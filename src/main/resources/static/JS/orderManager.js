@@ -23,7 +23,12 @@ const TableDataAccount = async () => {
                      <td class="align-middle">${formattedCreateDate}</td>
                      <td class="align-middle"><b class="text-danger">${detailOr.reduce((total, item) => total + item.price * item.quantity, 0)
                 .toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</b></td>
-                      <td><a style="cursor: pointer;font-size: 20px;" class="view-orderDetail" onclick="detailOr(${orderManager.id})"><i class="bi bi-eye text-dark-success" ></i></a></td>
+                     <td class="order-status ${orderManager.status === 'Confirmed' ? 'text-success' : ''}">
+  ${orderManager.status === 'Unconfimred' ? `
+    <button class="btn btn-success confirm-btn" onclick="confirmOrder(${orderManager.id})">Please confirm</button>
+  ` : orderManager.status}
+</td>
+                      <td><a style="cursor: pointer;font-size: 20px;" class="view-orderDetail" onclick="detailOr(${orderManager.id})"><i class="bi bi-eye"></i></a></td>
                 </tr>  
             `;
             trTableDataAcc.insertAdjacentHTML('beforeend', listAccount);
@@ -88,4 +93,24 @@ async function detailOr(id) {
     } catch (error) {
         console.error('Lỗi khi lấy thông tin order:', error);
     }
+}
+
+function confirmOrder(orderId) {
+
+    axios.patch(`/rest-orders/updateStatus/${orderId}`,{ status: 'Confirmed' })
+        .then(response => {
+
+            Swal.fire({
+                icon: 'success',
+                title: 'Added course successfully',
+                text: 'This course has been added successfully.',
+                timer: 3500
+            }).then((result) => {
+                window.location.reload();
+            });
+        })
+        .catch(error => {
+            console.error('Error confirming order:', error);
+            alert('An error occurred while confirming the order. Please try again later.');
+        });
 }

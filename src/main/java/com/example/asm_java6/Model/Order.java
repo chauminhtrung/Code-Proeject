@@ -19,6 +19,7 @@ public class Order  implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     String address;
+    String status;
     @Temporal(TemporalType.DATE)
     @Column(name = "Createdate")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSX")

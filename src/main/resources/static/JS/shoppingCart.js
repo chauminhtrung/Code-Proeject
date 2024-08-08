@@ -163,6 +163,7 @@ function checkout() {
         address: address,
         createDate: new Date(),
         account: {username: account},
+        status: "Unconfimred",
         get orderDetails() {
             return cart.map(item => {
                 return {
