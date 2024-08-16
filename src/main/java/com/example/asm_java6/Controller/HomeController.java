@@ -13,6 +13,11 @@ public class HomeController {
         return "home";
     }
 
+    @RequestMapping("/CourseRe")
+    public String CourseRe() {
+        return "form/CourseRe";
+    }
+
     @RequestMapping("/detail/id")
     public String detail(@RequestParam("id") Integer id) {
         return "detail";
